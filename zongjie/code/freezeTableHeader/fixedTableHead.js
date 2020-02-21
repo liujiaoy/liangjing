@@ -1,10 +1,11 @@
 /*
-    说明：fixedTableHead适用于单行表头，将表头固定在现有位置上
-          fixedTableHead2适用于单行或多行表头，table须有thead通过thead固定,表头固定在顶部
+    说明： 1.适用于单行或多行表头，固定thead，若无thead，默认固定table第一行
+           2.fixedTableHead适用于整个窗口滚动
+           3.fixedTableHead2适用于嵌套在页面中的表格，表格滚动，表格外层需包裹div
 
     使用： 在需要使用的页面添加此文件
             将需要固定表头的tableId传入该方法
-            例 fixedTableHead("#aaa")
+            例 fixedTableHead("#test")
 */ 
 function fixedTableHead(id){
     // console.log(id)
@@ -15,43 +16,66 @@ function fixedTableHead(id){
     // 动态新增表头并复制宽度
     var newtable=oldTableId.clone(true);
     newtable.attr("id","newTableId");
-    oldTableId.parent().prepend(newtable.remove().html(newtable.find("tr").eq(0)))
-    $("#newTableId").find('th').each(function (i) {
-        //console.log(i);
-        //console.log($("#gvPerson thead").find("th").eq(i).width());
-        $(this).css('width',oldTableId.find('th:eq(' + i + ')').width());
-    });
+    if(oldTableId.find("thead").length>0){
+        oldTableId.parent().prepend(newtable.remove().html(newtable.find("thead")));
+        $("#newTableId").find('tr').each(function (i) {
+            $(this).css('height',oldTableId.find('tr').eq(i).height())
+            $(this).find("th").each(function(j){
+                $(this).css('width',oldTableId.find('tr').eq(i).find('th:eq(' + j + ')').width());
+            })   
+        });
+    }else{
+        oldTableId.parent().prepend(newtable.remove().html(newtable.find("tr").eq(0)))
+        $("#newTableId").find('th').each(function (i) {
+            $(this).css('width',oldTableId.find('th:eq(' + i + ')').width());
+        });
+    }  
     // 新表头的位置
     $("#newTableId").css({
         "position": "fixed",
-        "top": h,
-        "left": w,
+        "top": 0,
+        "left": 0,
         "width": d,
-        "z-index": 999
+        "display":"none",
+        "z-index":2
     })
     //窗口大小改变时，对应表头宽度进行自适应
     $(window).resize(function () {
         // alert(1);
-        $("#newTableId").width(oldTableId.width())
-        $("#newTableId").find('th').each(function (i) {
-            $(this).css('width', oldTableId.find("th").eq(i).width());
-        });
+        $("#newTableId").width(oldTableId.width());
+        if(oldTableId.find("thead").length>0){
+            $("#newTableId").find('tr').each(function (i) {
+                $(this).css('height',oldTableId.find('tr').eq(i).height())
+                $(this).find("th").each(function(j){
+                    $(this).css('width',oldTableId.find('tr').eq(i).find('th:eq(' + j + ')').width());
+                })   
+            });
+        }else{
+            $("#newTableId").find('th').each(function (i) {
+                $(this).css('width',oldTableId.find('th:eq(' + i + ')').width());
+            });
+        }
     });
+    console.log(oldTableId.parent().html())
     // 当表头超出窗口宽度时，出现滚动条，新加的表头需要跟随滚动条移动
-    $(window).scroll(function () {
-        // console.log(111);
+    $(window).scroll(function(){  
+        // var w=oldTableId.offset().left;
+        var dist = oldTableId.offset().top-$(this).scrollTop();
+        if(dist< 0){
+            $("#newTableId").show(); 
+        }else{
+            $("#newTableId").hide(); 
+        }
         var c = $(this).scrollLeft();
-        var w=oldTableId.offset().left;
         $("#newTableId").css({
-            "left": -c+w
+            "left": -c
         })
     })
 }
 
-
-// 多行表头
+// 表格滚动
 function fixedTableHead2(id){
-    // console.log(id)
+
     var oldTableId=$(id);
     var h=oldTableId.offset().top;
     var w=oldTableId.offset().left;
@@ -59,18 +83,25 @@ function fixedTableHead2(id){
     // 动态新增表头并复制宽度
     var newtable=oldTableId.clone(true);
     newtable.attr("id","newTableId");
-    oldTableId.parent().prepend(newtable.remove().html(newtable.find("thead")))
-    $("#newTableId").find('tr').each(function (i) {
-        $(this).css('height',oldTableId.find('tr').eq(i).height())
-        $(this).find("th").each(function(j){
-            $(this).css('width',oldTableId.find('tr').eq(i).find('th:eq(' + j + ')').width());
-        })   
-    });
+    if(oldTableId.find("thead").length>0){
+        oldTableId.parent().prepend(newtable.remove().html(newtable.find("thead")));
+        $("#newTableId").find('tr').each(function (i) {
+            $(this).css('height',oldTableId.find('tr').eq(i).height())
+            $(this).find("th").each(function(j){
+                $(this).css('width',oldTableId.find('tr').eq(i).find('th:eq(' + j + ')').width());
+            })   
+        });
+    }else{
+        oldTableId.parent().prepend(newtable.remove().html(newtable.find("tr").eq(0)))
+        $("#newTableId").find('th').each(function (i) {
+            $(this).css('width',oldTableId.find('th:eq(' + i + ')').width());
+        });
+    }  
     // 新表头的位置
     $("#newTableId").css({
         "position": "fixed",
-        "top": 0,
-        "left": w,
+        "top": h,
+        "left": 0,
         "width": d,
         "z-index": 999,
         "display":"none"
@@ -78,19 +109,24 @@ function fixedTableHead2(id){
     //窗口大小改变时，对应表头宽度进行自适应
     $(window).resize(function () {
         // alert(1);
-        $("#newTableId").width(oldTableId.width())
-        $("#newTableId").find('tr').each(function (i) {
-            $(this).css('height',oldTableId.find('tr').eq(i).height())
-            $(this).find("th").each(function(j){
-                $(this).css('width',oldTableId.find('tr').eq(i).find('th:eq(' + j + ')').width());
-            })   
-        });
+        $("#newTableId").width(oldTableId.width());
+        if(oldTableId.find("thead").length>0){
+            $("#newTableId").find('tr').each(function (i) {
+                $(this).css('height',oldTableId.find('tr').eq(i).height())
+                $(this).find("th").each(function(j){
+                    $(this).css('width',oldTableId.find('tr').eq(i).find('th:eq(' + j + ')').width());
+                })   
+            });
+        }else{
+            $("#newTableId").find('th').each(function (i) {
+                $(this).css('width',oldTableId.find('th:eq(' + i + ')').width());
+            });
+        }
     });
     // 当表头超出窗口宽度时，出现滚动条，新加的表头需要跟随滚动条移动
-    $(window).scroll(function () {
+    oldTableId.parent().scroll(function () {
         // console.log(111);
-        var dist = oldTableId.offset().top-$(this).scrollTop();
-        if(dist<=0){
+        if($(this).scrollTop()>0){
             $("#newTableId").show(); 
         }else{
             $("#newTableId").hide(); 
@@ -98,7 +134,7 @@ function fixedTableHead2(id){
         var c = $(this).scrollLeft();
         var w=oldTableId.offset().left;
         $("#newTableId").css({
-            "left": -c+w
+            "left": -c
         })
     })
 }
