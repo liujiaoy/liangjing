@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../jquery.min.js"></script>
+    <title>固定表头</title>
+    <style type="text/css">
+    .tableparent{
+        width:100%;
+        height:200px;
+        background-color: #ccc;
+        overflow: scroll;
+    }
+        .tablediv{
+            position: relative;
+            width: 100%;
+        }
+        .head{
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div>学习使用VSCode</div>
+    <div class="tableparent">
+        <table class="tablediv">
+            <thead class="head">
+                <tr>
+                    <th>我是表头1</th>
+                    <th>我是表头2</th>
+                    <th>我是表头3</th>
+                    <th>我是表头4</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1111</td>
+                    <td>1111</td>
+                    <td>1111</td>
+                    <td>1111</td>
+                </tr>
+                <tr>
+                    <td>1111</td>
+                    <td>1111</td>
+                    <td>1111</td>
+                    <td>1111</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>1111</td>
+                    <td>1111</td>
+                    <td>1111</td>
+                    <td>1111</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <script>
+    $( function(){
+
+        var trnode=$("tbody");
+        var html="";
+        for(var i=0; i<10; i++){ 
+            html+=trnode.html()
+        }
+        trnode.html(html);
+     })
+    </script>
+</body>
+</html>
