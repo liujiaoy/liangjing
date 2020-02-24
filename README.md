@@ -1,2 +1,2 @@
 # liangjing
-个人总结
+对应电脑D:\liujiaoyang\liangjing
