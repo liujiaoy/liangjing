@@ -7,6 +7,15 @@
             将需要固定表头的tableId传入该方法
             例 fixedTableHead("#test")
 */ 
+{/* <script type="text/javascript" src="../js/fixedTableHead.js"></script>
+<script type="text/javascript">
+    //固定搜索栏与表头
+    $(document).ready(function () {
+        $("#newTableId").remove();
+        fixedTableHead("#gvList");
+        fillHead(".fixedHead");
+    })
+</script> */}
 function fixedTableHead(id){
     // console.log(id)
     var oldTableId=$(id);
@@ -33,10 +42,10 @@ function fixedTableHead(id){
     // 新表头的位置
     $("#newTableId").css({
         "position": "fixed",
-        "top": 0,
+        "top": h,
         "left": 0,
         "width": d,
-        "display":"none",
+        // "display":"none",
         "z-index":2
     })
     //窗口大小改变时，对应表头宽度进行自适应
@@ -60,17 +69,38 @@ function fixedTableHead(id){
     // 当表头超出窗口宽度时，出现滚动条，新加的表头需要跟随滚动条移动
     $(window).scroll(function(){  
         // var w=oldTableId.offset().left;
-        var dist = oldTableId.offset().top-$(this).scrollTop();
-        if(dist< 0){
-            $("#newTableId").show(); 
-        }else{
-            $("#newTableId").hide(); 
-        }
+        // var dist = oldTableId.offset().top-$(window).scrollTop();
+        // if(dist<0){
+        //     $("#newTableId").show(); 
+        // }else{
+        //     $("#newTableId").hide(); 
+        // }
         var c = $(this).scrollLeft();
         $("#newTableId").css({
             "left": -c
         })
     })
+
+}
+// 把滚动表头的上方填满
+function fillHead(id){
+    var h = $(id).height();
+    var color = $(id).css('background-color');
+    console.log(color);
+    $(id).css({
+        "position":"fixed",
+        "top":0,
+        "width":"100%",
+        "background-color":"#fff"
+    });
+    $("body").prepend('<div class="bcg"></div>');
+    $(".bcg").css({
+        "position":"relative",
+        "top":0,
+        "left":0,
+        "height":h,
+        "width":"100%",
+    })  
 }
 
 // 表格滚动

@@ -33,7 +33,8 @@
         $(function(){
             $("#button1").click(function(){
                 $("#newTableId").remove();
-                fixedTableHead("#test")
+                fixedTableHead("#test");
+                fillHead(".fixedHead");
             })
             $("#button2").click(function(){
                 $("#newTableId").remove();
@@ -45,8 +46,8 @@
 </head>
 
 <body>
-    <div >
-        <div><button id="button1">固定在浏览器顶部</button><button id="button2">测试在table原有位置</button></div>
+    <div>
+        <div class="fixedHead"><button id="button1">固定在浏览器顶部</button><button id="button2">测试在table原有位置</button></div>
         <div>
             <table id="test" class="test" border="0" cellspacing="0" cellpadding="0">
                 <thead>
