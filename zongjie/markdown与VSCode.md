@@ -26,8 +26,15 @@ __粗体__
 ___粗斜体___
 ~~嘿嘿嘿~~
 <u>哇呜</u>
+<center>我居中</center>
 
-****
+***
+
+* * *
+分割线
+
+
+***
 * 学习列表
 * 嘿嘿嘿
 - 换个方式
@@ -39,8 +46,11 @@ ___粗斜体___
         - 子子列表
 > 区块引用
 > 有什么用呢
+>> 我可以嵌套
+>>>厉害吧
 
 ```javascript
+// 代码，还是这个比较好用
 function getUrlParam(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
         var r = window.location.search.substr(1).match(reg);  //匹配目标参数
@@ -48,12 +58,27 @@ function getUrlParam(name) {
 }
 
 ```
+        <!-- 代码 -->
         function getUrlParam(name) {
                 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
                 var r = window.location.search.substr(1).match(reg);  //匹配目标参数
                 if (r != null) return unescape(r[2]); return null; //返回参数值
         }
 
+来学习表格
+|表头1|表头2|表头3|
+|----:|:----|:-:|
+|1|2|3|
+|1|2|3|
+|1|2|3|
+|1|2|3|
+
+        -: 设置内容和标题栏居右对齐。
+        :- 设置内容和标题栏居左对齐。
+        :-: 设置内容和标题栏居中对齐。
 [百度一下，你就知道](www.better2020.top)
 <http://www.better2020.top>
-![百度一下，你就知道](https://preview.qiantucdn.com/58pic/35/61/96/auto_29b58PICuh02m88s6S8dF_PIC2018.jpg!w1024_new_0)
+<img src="http://static.runoob.com/images/runoob-logo.png" width="50%">
+![百度一下，你就知道](http://static.runoob.com/images/runoob-logo.png)
+
+        目前支持的 HTML 元素有：<kbd> <b> <i> <em> <sup> <sub> <br>等 ，如：

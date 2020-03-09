@@ -1,0 +1,33 @@
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+<!-- 本地 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{message}}</div>
+        <ul>
+            <li v-for="eat in fruit">{{eat}}</li>
+        </ul>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message:'你好啊！李银河',
+                fruit:['苹果','橘子','香蕉']
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>

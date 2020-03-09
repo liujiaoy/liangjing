@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>测试固定表头</title>
     <script src="../jquery.min.js"></script>
-    <script src="fixedTableHead.js"></script>
+    <script src="jquery.fixedTableHead.js"></script>
     <style>
         *{
             margin: 0;
@@ -33,12 +33,11 @@
         $(function(){
             $("#button1").click(function(){
                 $("#newTableId").remove();
-                fixedTableHead("#test");
-                fillHead(".fixedHead");
+                $(".fixedHead").fillHead();
+                $("#test").fixedTableHead();
             })
             $("#button2").click(function(){
-                $("#newTableId").remove();
-                fixedTableHead2("#test")
+                $("#newTableId").remove();   
             })
         })
 

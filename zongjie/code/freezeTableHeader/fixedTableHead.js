@@ -171,7 +171,7 @@ function fixedTableHead2(id){
             $("#newTableId").hide(); 
         }
         var c = $(this).scrollLeft();
-        var w=oldTableId.offset().left-;
+        var w=oldTableId.offset().left;
         $("#newTableId").css({
             "left": -c
         })
