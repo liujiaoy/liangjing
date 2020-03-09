@@ -17,11 +17,14 @@ node是vue-cli的运行环境，并且nodejs中包括了npm
 
 顺势而生的问题 
 #### npm下载慢怎么办？
-    get命令查看registry,
+get命令查看registry,
+
     npm config get registry
-    原版镜像为 
-    http://registry.npmjs.org
-    使用set命令将镜像改为淘宝镜像
+
+原版镜像为 
+http://registry.npmjs.org
+
+使用set命令将镜像改为淘宝镜像
 
 ```
  npm config set registry http://registry.npm.taobao.org
@@ -52,7 +55,16 @@ node是vue-cli的运行环境，并且nodejs中包括了npm
 创建好的项目里面readme.md有写
 
 下载运行其他人的项目
-git clone 别人的项目地址
-进入到相应的项目再npm install （重要）安装依赖
-然后再npm run start 或者npm run dev运行
+
+    git clone 别人的项目地址
+
+进入到相应的项目再npm install（重要）安装依赖
+
+    npm install 
+
+运行
+
+    npm run start 
+    或者
+    npm run dev
 
