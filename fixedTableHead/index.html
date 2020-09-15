@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>固定表头方法演示</title>
+  <script src="jquery1.7.2.js"></script>
+  <script src="jquery.fixedTableHead.js"></script>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+    }
+    .table-div{
+      width:100%;
+      text-align: center;
+    }
+    .table-div table{
+      border-collapse:collapse;
+      width: 100%;
+    }
+    .table-div table thead{
+      background-color: #ccc;
+    }
+    .table-div table tbody td{
+      border: #ddd;
+    }
+    .btn-div{
+      text-align: right;
+    }
+    .small-table-div{
+      height:50px;
+      overflow-y:scroll;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="search-bar">
+    <div class="search">
+      <input maxlength="50" class="input-info" placeholder="输入院校名称">
+      <span>输入院校名称</span>
+      <button class="school-check2">查询</button>
+      <a href="https://mnzy.eol.cn/" target="_blank">
+        <div class="aiBtn newyshs"><span class="img">2020模拟志愿填报</span></div>
+      </a>
+      
+      <a href="https://gaokao.eol.cn/e_html/gk/2020zbhz1/index.html" target="_blank">
+        <div class="aiBtn newyshs"><span class="img">招办直播答疑</span></div>
+      </a>
+
+    </div>
+  </div>
+  <div class="small-table-div">
+    <table id="myTable2">
+      <tr>
+        <th>tou</th>
+        <th>偷偷</th>
+        <th>偷偷</th>
+        <th>偷偷</th>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+      </tr>
+    </table>
+  </div>
+  <div class="table-div">
+    <table id="myTable">
+      <thead>
+        <tr>
+          <th class="td-name" rowspan="2">学校名称</th>
+          <th rowspan="2" style="width: 8%;">所在地</th>
+          <th rowspan="2" class="td-xueli">办学类型</th>
+          <th rowspan="2">高校热度</th>
+          <th rowspan="2">在线咨询</th>
+          <th rowspan="2">高校对比</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23355"
+              style="color: red;">河南大学</a></td>
+          <td style="display: table-cell;">河南</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">1010.1w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1015&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23355" style="color: red;">河南大学</a></td>
+                  <td style="width: 8%;">河南</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 1010.1w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1015&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23355"><img
+                src="https://static-data.eol.cn/upload/logo/459.jpg"></a>
+            <div>
+              <p><span>河南大学坐落在历史文化名城、八朝古都开封。这里曾是河南贡院的所在地，1903、1904年最后两场全国会试在这里举行，上千...</span>【<a class="notext"
+                  target="_black" data-publish="23355" href="http://zs.henu.edu.cn/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="23355"> <span> 专业介绍 </span> </a><a data-publish="23355"> <span> 招生章程 </span> </a><a
+                  data-publish="23355"> <span> 招生计划 </span> </a><a data-publish="23355"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="22687"
+              style="color: red;">上海对外经贸大学</a></td>
+          <td style="display: table-cell;">上海</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">431.2w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=3261&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="22687" style="color: red;">上海对外经贸大学</a></td>
+                  <td style="width: 8%;">上海</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 431.2w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=3261&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="22687"><img
+                src="https://static-data.eol.cn/upload/logo/318.jpg"></a>
+            <div>
+              <p><span>上海对外经贸大学（原上海对外贸易学院），是为适应新中国对外贸易事业快速发展需要而建立的高等院校，是原对外经济贸易部（商务...</span>【<a class="notext"
+                  target="_black" data-publish="22687" href="http://zhaosheng.suibe.edu.cn/"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="22687"> <span> 专业介绍 </span> </a><a
+                  data-publish="22687"> <span> 招生章程 </span> </a><a data-publish="22687"> <span> 招生计划 </span> </a><a
+                  data-publish="22687"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23106"
+              style="color: red;">重庆邮电大学</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">727.5w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=758&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23106" style="color: red;">重庆邮电大学</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 727.5w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=758&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23106"><img
+                src="https://static-data.eol.cn/upload/logo/184.jpg"></a>
+            <div>
+              <p><span>工业和信息化部重庆市人民政府共建高校国家“中西部高等教育振兴计划”支持高校教育部“卓越工程师教育培养计划”实施高校国家技...</span>【<a class="notext"
+                  target="_black" data-publish="23106" href="http://zs.cqupt.edu.cn/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="23106"> <span> 专业介绍 </span> </a><a data-publish="23106"> <span> 招生章程 </span> </a><a
+                  data-publish="23106"> <span> 招生计划 </span> </a><a data-publish="23106"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="28965"
+              style="color: red;">贵州师范大学</a></td>
+          <td style="display: table-cell;">贵州</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">360.2w</td>
+          <td style="display: table-cell;"><a href="https://m-view.eol.cn/h5/zsgk/answer_noresult.html?t=1111"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="28965" style="color: red;">贵州师范大学</a></td>
+                  <td style="width: 8%;">贵州</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 360.2w</td>
+                  <td style="width: 15%;"><a href="https://m-view.eol.cn/h5/zsgk/answer_noresult.html?t=1111"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="28965"><img
+                src="https://static-data.eol.cn/upload/logo/514.jpg"></a>
+            <div>
+              <p><span>贵州师范大学的前身——“国立贵阳师范学院”创建于1941年，是当时全国八所国立师范学院之一。建校之初，以王克仁、齐泮林、...</span>【<a class="notext"
+                  target="_black" data-publish="28965" href="http://zjc.gznu.edu.cn/sdzs/"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="28965"> <span> 专业介绍 </span> </a><a
+                  data-publish="28965"> <span> 招生章程 </span> </a><a data-publish="28965"> <span> 招生计划 </span> </a><a
+                  data-publish="28965"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23176"
+              style="color: red;">重庆理工大学</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">814.1w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=760&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23176" style="color: red;">重庆理工大学</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 814.1w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=760&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23176"><img
+                src="https://static-data.eol.cn/upload/logo/187.jpg"></a>
+            <div>
+              <p><span>抗战烽火淬炼，兵工血脉浸润。重庆理工大学是重庆市重点建设高校，是西南地区唯一一所具有兵工背景的普通高等本科院校。学校溯源...</span>【<a class="notext"
+                  target="_black" data-publish="23176" href="https://zs.cqut.edu.cn/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="23176"> <span> 专业介绍 </span> </a><a data-publish="23176"> <span> 招生章程 </span> </a><a
+                  data-publish="23176"> <span> 招生计划 </span> </a><a data-publish="23176"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="43414"
+              style="color: red;">成都工业学院</a></td>
+          <td style="display: table-cell;">四川</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">172.5w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1282&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="43414" style="color: red;">成都工业学院</a></td>
+                  <td style="width: 8%;">四川</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 172.5w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1282&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="43414"><img
+                src="https://static-data.eol.cn/upload/logo/769.jpg"></a>
+            <div>
+              <p><span>成都工业学院是四川省人民政府举办的公办全日制普通本科学校。学校创办于1913年，是辛亥革命后四川省举办的第一所实业学校。...</span>【<a class="notext"
+                  target="_black" data-publish="43414" href="http://zs.cdtu.edu.cn" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="43414"> <span> 专业介绍 </span> </a><a data-publish="43414"> <span> 招生章程 </span> </a><a
+                  data-publish="43414"> <span> 招生计划 </span> </a><a data-publish="43414"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23434"
+              style="color: red;">南方科技大学</a></td>
+          <td style="display: table-cell;">广东</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">137.5w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=2983&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23434" style="color: red;">南方科技大学</a></td>
+                  <td style="width: 8%;">广东</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 137.5w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=2983&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23434"><img
+                src="https://static-data.eol.cn/upload/logo/2941.jpg"></a>
+            <div>
+              <p><span>南方科技大学(简称南科大)是深圳在中国高等教育改革发展的宏观背景下，创建的一所高起点、高定位的公办创新型大学，它肩负着为...</span>【<a class="notext"
+                  target="_black" data-publish="23434" href="http://zs.sustc.edu.cn" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="23434"> <span> 专业介绍 </span> </a><a data-publish="23434"> <span> 招生章程 </span> </a><a
+                  data-publish="23434"> <span> 招生计划 </span> </a><a data-publish="23434"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="40106"
+              style="color: red;">重庆大学城市科技学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">329w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=716&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="40106" style="color: red;">重庆大学城市科技学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 329w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=716&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="40106"><img
+                src="https://static-data.eol.cn/upload/logo/1474.jpg"></a>
+            <div>
+              <p><span>重庆大学城市科技学院是经国家教育部批准设立的一所以本科教育为主的综合性全日制普通高等学校。学校是由教育部直属全国重点大学...</span>【<a class="notext"
+                  target="_black" data-publish="40106" href="http://subsite.cqucc.com.cn:8005/zsb/default.html"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="40106"> <span> 专业介绍 </span> </a><a
+                  data-publish="40106"> <span> 招生章程 </span> </a><a data-publish="40106"> <span> 招生计划 </span> </a><a
+                  data-publish="40106"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="24048"
+              style="color: red;">重庆师范大学涉外商贸学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">206.9w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=721&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="24048" style="color: red;">重庆师范大学涉外商贸学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 206.9w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=721&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="24048"><img
+                src="https://static-data.eol.cn/upload/logo/1472.jpg"></a>
+            <div>
+              <p><span>重庆师范大学涉外商贸学院是2002年经教育部批准设立的全日制普通本科高校，曾被评为“全国先进独立学院”、“中国品牌影响力...</span>【<a class="notext"
+                  target="_black" data-publish="24048" href="http://www.swsmzs.cn/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="24048"> <span> 专业介绍 </span> </a><a data-publish="24048"> <span> 招生章程 </span> </a><a
+                  data-publish="24048"> <span> 招生计划 </span> </a><a data-publish="24048"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23654"
+              style="color: red;">重庆邮电大学移通学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">281.7w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1527&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23654" style="color: red;">重庆邮电大学移通学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 281.7w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1527&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23654"><img
+                src="https://static-data.eol.cn/upload/logo/1476.jpg"></a>
+            <div>
+              <p><span>全国十佳优秀独立学院中国十大品牌独立学院最具综合实力中外合作院校中国社会影响力就业典型高校西部信息产业国际化人才的摇篮中...</span>【<a class="notext"
+                  target="_black" data-publish="23654" href="http://www.cqytu.com/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="23654"> <span> 专业介绍 </span> </a><a data-publish="23654"> <span> 招生章程 </span> </a><a
+                  data-publish="23654"> <span> 招生计划 </span> </a><a data-publish="23654"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="22296"
+              style="color: red;">重庆电子工程职业学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">专科（高职)</td>
+          <td style="display: table-cell;">113.9w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1826&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="22296" style="color: red;">重庆电子工程职业学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">专科（高职)</td>
+                  <td style="width: 15%;"> 113.9w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1826&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="22296"><img
+                src="https://static-data.eol.cn/upload/logo/1488.jpg"></a>
+            <div>
+              <p><span>重庆电子工程职业学院是由重庆市政府举办、重庆市教委主管、市教委与市经信委共建的全日制普通高等院校。学校始建于1965年，...</span>【<a class="notext"
+                  target="_black" data-publish="22296" href="https://oacd.cqcet.edu.cn/"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="22296"> <span> 专业介绍 </span> </a><a
+                  data-publish="22296"> <span> 招生章程 </span> </a><a data-publish="22296"> <span> 招生计划 </span> </a><a
+                  data-publish="22296"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="26181"
+              style="color: red;">重庆工商大学融智学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">211.9w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=717&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="26181" style="color: red;">重庆工商大学融智学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 211.9w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=717&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="26181"><img
+                src="https://static-data.eol.cn/upload/logo/1475.jpg"></a>
+            <div>
+              <p><span>办学条件：学院位于重庆市巴南区龙洲湾尚文大道906号，规划占地902亩。校区建筑极具现代气息，拥有完善的教学和生活设施：...</span>【<a class="notext"
+                  target="_black" data-publish="26181" href="http://zs.cqrz.edu.cn/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="26181"> <span> 专业介绍 </span> </a><a data-publish="26181"> <span> 招生章程 </span> </a><a
+                  data-publish="26181"> <span> 招生计划 </span> </a><a data-publish="26181"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23225"
+              style="color: red;">重庆文理学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">319.5w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1510&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23225" style="color: red;">重庆文理学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 319.5w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1510&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23225"><img
+                src="https://static-data.eol.cn/upload/logo/1038.jpg"></a>
+            <div>
+              <p><span>重庆文理学院是重庆市人民政府主办的全日制普通本科高等学校，其前身重庆师范高等专科学校和渝州教育学院分别创办于1976年和...</span>【<a class="notext"
+                  target="_black" data-publish="23225" href="http://zb.cqwu.edu.cn" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="23225"> <span> 专业介绍 </span> </a><a data-publish="23225"> <span> 招生章程 </span> </a><a
+                  data-publish="23225"> <span> 招生计划 </span> </a><a data-publish="23225"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23513"
+              style="color: red;">黑龙江东方学院</a></td>
+          <td style="display: table-cell;">黑龙江</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">154w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1012&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23513" style="color: red;">黑龙江东方学院</a></td>
+                  <td style="width: 8%;">黑龙江</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 154w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1012&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23513"><img
+                src="https://static-data.eol.cn/upload/logo/456.jpg"></a>
+            <div>
+              <p><span>黑龙江东方学院是改革开放后黑龙江省第一所民办普通高等高校，于1992年由孟新、尚鹤翔、周长源、刘式勤等老一辈教育工作者发...</span>【<a class="notext"
+                  target="_black" data-publish="23513" href="http://www.dfxy.net/zsjy/index.htm"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="23513"> <span> 专业介绍 </span> </a><a
+                  data-publish="23513"> <span> 招生章程 </span> </a><a data-publish="23513"> <span> 招生计划 </span> </a><a
+                  data-publish="23513"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="29670"
+              style="color: red;">重庆能源职业学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">专科（高职)</td>
+          <td style="display: table-cell;">50.8w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1851&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="29670" style="color: red;">重庆能源职业学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">专科（高职)</td>
+                  <td style="width: 15%;"> 50.8w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1851&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="29670"><img
+                src="https://static-data.eol.cn/upload/logo/1523.jpg"></a>
+            <div>
+              <p><span>重庆能源职业学院创建于2009年4月，是经重庆市人民政府批准、教育部备案，面向全国招生的全日制民办普通高校（教育部代码：...</span>【<a class="notext"
+                  target="_black" data-publish="29670" href="http://www.cqny.edu.cn/zsxx/"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="29670"> <span> 专业介绍 </span> </a><a
+                  data-publish="29670"> <span> 招生章程 </span> </a><a data-publish="29670"> <span> 招生计划 </span> </a><a
+                  data-publish="29670"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="24063"
+              style="color: red;">重庆交通职业学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">专科（高职)</td>
+          <td style="display: table-cell;">280.8w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=2867&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="24063" style="color: red;">重庆交通职业学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">专科（高职)</td>
+                  <td style="width: 15%;"> 280.8w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=2867&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="24063"><img
+                src="https://static-data.eol.cn/upload/logo/2691.jpg"></a>
+            <div>
+              <p><span>教育部全日制普通高校教育部代码：14267重庆交通大学合作办学单位在渝招生代码：5069重庆交通职业学院是经重庆市人民政...</span>【<a class="notext"
+                  target="_black" data-publish="24063" href="http://www.cqjy.edu.cn/Manage/zsc.aspx?Typeid=23"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="24063"> <span> 专业介绍 </span> </a><a
+                  data-publish="24063"> <span> 招生章程 </span> </a><a data-publish="24063"> <span> 招生计划 </span> </a><a
+                  data-publish="24063"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23289"
+              style="color: red;">广州工商学院</a></td>
+          <td style="display: table-cell;">广东</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">112.5w</td>
+          <td style="display: table-cell;"><a href="https://m-view.eol.cn/h5/zsgk/answer_noresult.html?t=1111"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23289" style="color: red;">广州工商学院</a></td>
+                  <td style="width: 8%;">广东</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 112.5w</td>
+                  <td style="width: 15%;"><a href="https://m-view.eol.cn/h5/zsgk/answer_noresult.html?t=1111"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23289"><img
+                src="https://static-data.eol.cn/upload/logo/633.jpg"></a>
+            <div>
+              <p><span>广州工商学院是教育部批准设立的民办全日制普通本科院校,创建于1995年，2004年独立设置为广州工商职业技术学院，201...</span>【<a class="notext"
+                  target="_black" data-publish="23289" href="http://www.gzgs.org.cn/zsb"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="23289"> <span> 专业介绍 </span> </a><a
+                  data-publish="23289"> <span> 招生章程 </span> </a><a data-publish="23289"> <span> 招生计划 </span> </a><a
+                  data-publish="23289"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="26603"
+              style="color: red;">重庆工商职业学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">专科（高职)</td>
+          <td style="display: table-cell;">44.2w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1833&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="26603" style="color: red;">重庆工商职业学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">专科（高职)</td>
+                  <td style="width: 15%;"> 44.2w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1833&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="26603"><img
+                src="https://static-data.eol.cn/upload/logo/1496.jpg"></a>
+            <div>
+              <p><span>重庆工商职业学院是由重庆市人民政府举办，经教育部批准设立的公办全日制普通高等学校，面向全国招生，同时也是国家批准的留学生...</span>【<a class="notext"
+                  target="_black" data-publish="26603" href="http://zb.cqtbi.edu.cn/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="26603"> <span> 专业介绍 </span> </a><a data-publish="26603"> <span> 招生章程 </span> </a><a
+                  data-publish="26603"> <span> 招生计划 </span> </a><a data-publish="26603"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="28662"
+              style="color: red;">集美大学诚毅学院</a></td>
+          <td style="display: table-cell;">福建</td>
+          <td style="display: table-cell;">独立学院</td>
+          <td style="display: table-cell;">180.5w</td>
+          <td style="display: table-cell;"><a href="https://m-view.eol.cn/h5/zsgk/answer_noresult.html?t=1111"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="28662" style="color: red;">集美大学诚毅学院</a></td>
+                  <td style="width: 8%;">福建</td>
+                  <td style="width: 155px;">独立学院</td>
+                  <td style="width: 15%;"> 180.5w</td>
+                  <td style="width: 15%;"><a href="https://m-view.eol.cn/h5/zsgk/answer_noresult.html?t=1111"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="28662"><img
+                src="https://static-data.eol.cn/upload/logo/1214.jpg"></a>
+            <div>
+              <p><span>集美大学诚毅学院创办于2003年，是经国家教育部批准、由集美大学与福建集美大学教育发展基金会按新模式新机制联合举办的独立...</span>【<a class="notext"
+                  target="_black" data-publish="28662" href="http://cyzsb.jmu.edu.cn/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="28662"> <span> 专业介绍 </span> </a><a data-publish="28662"> <span> 招生章程 </span> </a><a
+                  data-publish="28662"> <span> 招生计划 </span> </a><a data-publish="28662"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="44140"
+              style="color: red;">河北环境工程学院</a></td>
+          <td style="display: table-cell;">河北</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">197.8w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=2984&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="44140" style="color: red;">河北环境工程学院</a></td>
+                  <td style="width: 8%;">河北</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 197.8w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=2984&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="44140"><img
+                src="https://static-data.eol.cn/upload/logo/2855.jpg"></a>
+            <div>
+              <p><span>地理位置：河北环境工程学院坐落在气候宜人、环境优美的避暑圣地河北省秦皇岛市北戴河区，拥有得天独厚的区位优势。秦皇岛是河北...</span>【<a class="notext"
+                  target="_black" data-publish="44140" href="https://zsjyc.hebuee.edu.cn/"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="44140"> <span> 专业介绍 </span> </a><a
+                  data-publish="44140"> <span> 招生章程 </span> </a><a data-publish="44140"> <span> 招生计划 </span> </a><a
+                  data-publish="44140"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23355"
+              style="color: red;">河南大学</a></td>
+          <td style="display: table-cell;">河南</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">1010.1w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1015&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23355" style="color: red;">河南大学</a></td>
+                  <td style="width: 8%;">河南</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 1010.1w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1015&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23355"><img
+                src="https://static-data.eol.cn/upload/logo/459.jpg"></a>
+            <div>
+              <p><span>河南大学坐落在历史文化名城、八朝古都开封。这里曾是河南贡院的所在地，1903、1904年最后两场全国会试在这里举行，上千...</span>【<a class="notext"
+                  target="_black" data-publish="23355" href="http://zs.henu.edu.cn/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="23355"> <span> 专业介绍 </span> </a><a data-publish="23355"> <span> 招生章程 </span> </a><a
+                  data-publish="23355"> <span> 招生计划 </span> </a><a data-publish="23355"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="22687"
+              style="color: red;">上海对外经贸大学</a></td>
+          <td style="display: table-cell;">上海</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">431.2w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=3261&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="22687" style="color: red;">上海对外经贸大学</a></td>
+                  <td style="width: 8%;">上海</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 431.2w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=3261&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="22687"><img
+                src="https://static-data.eol.cn/upload/logo/318.jpg"></a>
+            <div>
+              <p><span>上海对外经贸大学（原上海对外贸易学院），是为适应新中国对外贸易事业快速发展需要而建立的高等院校，是原对外经济贸易部（商务...</span>【<a class="notext"
+                  target="_black" data-publish="22687" href="http://zhaosheng.suibe.edu.cn/"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="22687"> <span> 专业介绍 </span> </a><a
+                  data-publish="22687"> <span> 招生章程 </span> </a><a data-publish="22687"> <span> 招生计划 </span> </a><a
+                  data-publish="22687"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23106"
+              style="color: red;">重庆邮电大学</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">727.5w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=758&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23106" style="color: red;">重庆邮电大学</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 727.5w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=758&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23106"><img
+                src="https://static-data.eol.cn/upload/logo/184.jpg"></a>
+            <div>
+              <p><span>工业和信息化部重庆市人民政府共建高校国家“中西部高等教育振兴计划”支持高校教育部“卓越工程师教育培养计划”实施高校国家技...</span>【<a class="notext"
+                  target="_black" data-publish="23106" href="http://zs.cqupt.edu.cn/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="23106"> <span> 专业介绍 </span> </a><a data-publish="23106"> <span> 招生章程 </span> </a><a
+                  data-publish="23106"> <span> 招生计划 </span> </a><a data-publish="23106"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="28965"
+              style="color: red;">贵州师范大学</a></td>
+          <td style="display: table-cell;">贵州</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">360.2w</td>
+          <td style="display: table-cell;"><a href="https://m-view.eol.cn/h5/zsgk/answer_noresult.html?t=1111"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="28965" style="color: red;">贵州师范大学</a></td>
+                  <td style="width: 8%;">贵州</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 360.2w</td>
+                  <td style="width: 15%;"><a href="https://m-view.eol.cn/h5/zsgk/answer_noresult.html?t=1111"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="28965"><img
+                src="https://static-data.eol.cn/upload/logo/514.jpg"></a>
+            <div>
+              <p><span>贵州师范大学的前身——“国立贵阳师范学院”创建于1941年，是当时全国八所国立师范学院之一。建校之初，以王克仁、齐泮林、...</span>【<a class="notext"
+                  target="_black" data-publish="28965" href="http://zjc.gznu.edu.cn/sdzs/"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="28965"> <span> 专业介绍 </span> </a><a
+                  data-publish="28965"> <span> 招生章程 </span> </a><a data-publish="28965"> <span> 招生计划 </span> </a><a
+                  data-publish="28965"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23176"
+              style="color: red;">重庆理工大学</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">814.1w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=760&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23176" style="color: red;">重庆理工大学</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 814.1w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=760&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23176"><img
+                src="https://static-data.eol.cn/upload/logo/187.jpg"></a>
+            <div>
+              <p><span>抗战烽火淬炼，兵工血脉浸润。重庆理工大学是重庆市重点建设高校，是西南地区唯一一所具有兵工背景的普通高等本科院校。学校溯源...</span>【<a class="notext"
+                  target="_black" data-publish="23176" href="https://zs.cqut.edu.cn/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="23176"> <span> 专业介绍 </span> </a><a data-publish="23176"> <span> 招生章程 </span> </a><a
+                  data-publish="23176"> <span> 招生计划 </span> </a><a data-publish="23176"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="43414"
+              style="color: red;">成都工业学院</a></td>
+          <td style="display: table-cell;">四川</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">172.5w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1282&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="43414" style="color: red;">成都工业学院</a></td>
+                  <td style="width: 8%;">四川</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 172.5w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1282&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="43414"><img
+                src="https://static-data.eol.cn/upload/logo/769.jpg"></a>
+            <div>
+              <p><span>成都工业学院是四川省人民政府举办的公办全日制普通本科学校。学校创办于1913年，是辛亥革命后四川省举办的第一所实业学校。...</span>【<a class="notext"
+                  target="_black" data-publish="43414" href="http://zs.cdtu.edu.cn" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="43414"> <span> 专业介绍 </span> </a><a data-publish="43414"> <span> 招生章程 </span> </a><a
+                  data-publish="43414"> <span> 招生计划 </span> </a><a data-publish="43414"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23434"
+              style="color: red;">南方科技大学</a></td>
+          <td style="display: table-cell;">广东</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">137.5w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=2983&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23434" style="color: red;">南方科技大学</a></td>
+                  <td style="width: 8%;">广东</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 137.5w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=2983&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23434"><img
+                src="https://static-data.eol.cn/upload/logo/2941.jpg"></a>
+            <div>
+              <p><span>南方科技大学(简称南科大)是深圳在中国高等教育改革发展的宏观背景下，创建的一所高起点、高定位的公办创新型大学，它肩负着为...</span>【<a class="notext"
+                  target="_black" data-publish="23434" href="http://zs.sustc.edu.cn" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="23434"> <span> 专业介绍 </span> </a><a data-publish="23434"> <span> 招生章程 </span> </a><a
+                  data-publish="23434"> <span> 招生计划 </span> </a><a data-publish="23434"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="40106"
+              style="color: red;">重庆大学城市科技学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">329w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=716&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="40106" style="color: red;">重庆大学城市科技学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 329w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=716&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="40106"><img
+                src="https://static-data.eol.cn/upload/logo/1474.jpg"></a>
+            <div>
+              <p><span>重庆大学城市科技学院是经国家教育部批准设立的一所以本科教育为主的综合性全日制普通高等学校。学校是由教育部直属全国重点大学...</span>【<a class="notext"
+                  target="_black" data-publish="40106" href="http://subsite.cqucc.com.cn:8005/zsb/default.html"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="40106"> <span> 专业介绍 </span> </a><a
+                  data-publish="40106"> <span> 招生章程 </span> </a><a data-publish="40106"> <span> 招生计划 </span> </a><a
+                  data-publish="40106"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="24048"
+              style="color: red;">重庆师范大学涉外商贸学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">206.9w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=721&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="24048" style="color: red;">重庆师范大学涉外商贸学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 206.9w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=721&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="24048"><img
+                src="https://static-data.eol.cn/upload/logo/1472.jpg"></a>
+            <div>
+              <p><span>重庆师范大学涉外商贸学院是2002年经教育部批准设立的全日制普通本科高校，曾被评为“全国先进独立学院”、“中国品牌影响力...</span>【<a class="notext"
+                  target="_black" data-publish="24048" href="http://www.swsmzs.cn/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="24048"> <span> 专业介绍 </span> </a><a data-publish="24048"> <span> 招生章程 </span> </a><a
+                  data-publish="24048"> <span> 招生计划 </span> </a><a data-publish="24048"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23654"
+              style="color: red;">重庆邮电大学移通学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">281.7w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1527&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23654" style="color: red;">重庆邮电大学移通学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 281.7w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1527&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23654"><img
+                src="https://static-data.eol.cn/upload/logo/1476.jpg"></a>
+            <div>
+              <p><span>全国十佳优秀独立学院中国十大品牌独立学院最具综合实力中外合作院校中国社会影响力就业典型高校西部信息产业国际化人才的摇篮中...</span>【<a class="notext"
+                  target="_black" data-publish="23654" href="http://www.cqytu.com/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="23654"> <span> 专业介绍 </span> </a><a data-publish="23654"> <span> 招生章程 </span> </a><a
+                  data-publish="23654"> <span> 招生计划 </span> </a><a data-publish="23654"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="22296"
+              style="color: red;">重庆电子工程职业学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">专科（高职)</td>
+          <td style="display: table-cell;">113.9w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1826&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="22296" style="color: red;">重庆电子工程职业学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">专科（高职)</td>
+                  <td style="width: 15%;"> 113.9w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1826&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="22296"><img
+                src="https://static-data.eol.cn/upload/logo/1488.jpg"></a>
+            <div>
+              <p><span>重庆电子工程职业学院是由重庆市政府举办、重庆市教委主管、市教委与市经信委共建的全日制普通高等院校。学校始建于1965年，...</span>【<a class="notext"
+                  target="_black" data-publish="22296" href="https://oacd.cqcet.edu.cn/"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="22296"> <span> 专业介绍 </span> </a><a
+                  data-publish="22296"> <span> 招生章程 </span> </a><a data-publish="22296"> <span> 招生计划 </span> </a><a
+                  data-publish="22296"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="26181"
+              style="color: red;">重庆工商大学融智学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">211.9w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=717&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="26181" style="color: red;">重庆工商大学融智学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 211.9w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=717&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="26181"><img
+                src="https://static-data.eol.cn/upload/logo/1475.jpg"></a>
+            <div>
+              <p><span>办学条件：学院位于重庆市巴南区龙洲湾尚文大道906号，规划占地902亩。校区建筑极具现代气息，拥有完善的教学和生活设施：...</span>【<a class="notext"
+                  target="_black" data-publish="26181" href="http://zs.cqrz.edu.cn/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="26181"> <span> 专业介绍 </span> </a><a data-publish="26181"> <span> 招生章程 </span> </a><a
+                  data-publish="26181"> <span> 招生计划 </span> </a><a data-publish="26181"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23225"
+              style="color: red;">重庆文理学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">319.5w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1510&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23225" style="color: red;">重庆文理学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 319.5w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1510&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23225"><img
+                src="https://static-data.eol.cn/upload/logo/1038.jpg"></a>
+            <div>
+              <p><span>重庆文理学院是重庆市人民政府主办的全日制普通本科高等学校，其前身重庆师范高等专科学校和渝州教育学院分别创办于1976年和...</span>【<a class="notext"
+                  target="_black" data-publish="23225" href="http://zb.cqwu.edu.cn" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="23225"> <span> 专业介绍 </span> </a><a data-publish="23225"> <span> 招生章程 </span> </a><a
+                  data-publish="23225"> <span> 招生计划 </span> </a><a data-publish="23225"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23513"
+              style="color: red;">黑龙江东方学院</a></td>
+          <td style="display: table-cell;">黑龙江</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">154w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1012&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23513" style="color: red;">黑龙江东方学院</a></td>
+                  <td style="width: 8%;">黑龙江</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 154w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1012&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23513"><img
+                src="https://static-data.eol.cn/upload/logo/456.jpg"></a>
+            <div>
+              <p><span>黑龙江东方学院是改革开放后黑龙江省第一所民办普通高等高校，于1992年由孟新、尚鹤翔、周长源、刘式勤等老一辈教育工作者发...</span>【<a class="notext"
+                  target="_black" data-publish="23513" href="http://www.dfxy.net/zsjy/index.htm"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="23513"> <span> 专业介绍 </span> </a><a
+                  data-publish="23513"> <span> 招生章程 </span> </a><a data-publish="23513"> <span> 招生计划 </span> </a><a
+                  data-publish="23513"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="29670"
+              style="color: red;">重庆能源职业学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">专科（高职)</td>
+          <td style="display: table-cell;">50.8w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1851&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="29670" style="color: red;">重庆能源职业学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">专科（高职)</td>
+                  <td style="width: 15%;"> 50.8w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1851&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="29670"><img
+                src="https://static-data.eol.cn/upload/logo/1523.jpg"></a>
+            <div>
+              <p><span>重庆能源职业学院创建于2009年4月，是经重庆市人民政府批准、教育部备案，面向全国招生的全日制民办普通高校（教育部代码：...</span>【<a class="notext"
+                  target="_black" data-publish="29670" href="http://www.cqny.edu.cn/zsxx/"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="29670"> <span> 专业介绍 </span> </a><a
+                  data-publish="29670"> <span> 招生章程 </span> </a><a data-publish="29670"> <span> 招生计划 </span> </a><a
+                  data-publish="29670"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="24063"
+              style="color: red;">重庆交通职业学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">专科（高职)</td>
+          <td style="display: table-cell;">280.8w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=2867&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="24063" style="color: red;">重庆交通职业学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">专科（高职)</td>
+                  <td style="width: 15%;"> 280.8w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=2867&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="24063"><img
+                src="https://static-data.eol.cn/upload/logo/2691.jpg"></a>
+            <div>
+              <p><span>教育部全日制普通高校教育部代码：14267重庆交通大学合作办学单位在渝招生代码：5069重庆交通职业学院是经重庆市人民政...</span>【<a class="notext"
+                  target="_black" data-publish="24063" href="http://www.cqjy.edu.cn/Manage/zsc.aspx?Typeid=23"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="24063"> <span> 专业介绍 </span> </a><a
+                  data-publish="24063"> <span> 招生章程 </span> </a><a data-publish="24063"> <span> 招生计划 </span> </a><a
+                  data-publish="24063"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="23289"
+              style="color: red;">广州工商学院</a></td>
+          <td style="display: table-cell;">广东</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">112.5w</td>
+          <td style="display: table-cell;"><a href="https://m-view.eol.cn/h5/zsgk/answer_noresult.html?t=1111"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="23289" style="color: red;">广州工商学院</a></td>
+                  <td style="width: 8%;">广东</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 112.5w</td>
+                  <td style="width: 15%;"><a href="https://m-view.eol.cn/h5/zsgk/answer_noresult.html?t=1111"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="23289"><img
+                src="https://static-data.eol.cn/upload/logo/633.jpg"></a>
+            <div>
+              <p><span>广州工商学院是教育部批准设立的民办全日制普通本科院校,创建于1995年，2004年独立设置为广州工商职业技术学院，201...</span>【<a class="notext"
+                  target="_black" data-publish="23289" href="http://www.gzgs.org.cn/zsb"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="23289"> <span> 专业介绍 </span> </a><a
+                  data-publish="23289"> <span> 招生章程 </span> </a><a data-publish="23289"> <span> 招生计划 </span> </a><a
+                  data-publish="23289"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="26603"
+              style="color: red;">重庆工商职业学院</a></td>
+          <td style="display: table-cell;">重庆</td>
+          <td style="display: table-cell;">专科（高职)</td>
+          <td style="display: table-cell;">44.2w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=1833&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="26603" style="color: red;">重庆工商职业学院</a></td>
+                  <td style="width: 8%;">重庆</td>
+                  <td style="width: 155px;">专科（高职)</td>
+                  <td style="width: 15%;"> 44.2w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=1833&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="26603"><img
+                src="https://static-data.eol.cn/upload/logo/1496.jpg"></a>
+            <div>
+              <p><span>重庆工商职业学院是由重庆市人民政府举办，经教育部批准设立的公办全日制普通高等学校，面向全国招生，同时也是国家批准的留学生...</span>【<a class="notext"
+                  target="_black" data-publish="26603" href="http://zb.cqtbi.edu.cn/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="26603"> <span> 专业介绍 </span> </a><a data-publish="26603"> <span> 招生章程 </span> </a><a
+                  data-publish="26603"> <span> 招生计划 </span> </a><a data-publish="26603"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="28662"
+              style="color: red;">集美大学诚毅学院</a></td>
+          <td style="display: table-cell;">福建</td>
+          <td style="display: table-cell;">独立学院</td>
+          <td style="display: table-cell;">180.5w</td>
+          <td style="display: table-cell;"><a href="https://m-view.eol.cn/h5/zsgk/answer_noresult.html?t=1111"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="28662" style="color: red;">集美大学诚毅学院</a></td>
+                  <td style="width: 8%;">福建</td>
+                  <td style="width: 155px;">独立学院</td>
+                  <td style="width: 15%;"> 180.5w</td>
+                  <td style="width: 15%;"><a href="https://m-view.eol.cn/h5/zsgk/answer_noresult.html?t=1111"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="28662"><img
+                src="https://static-data.eol.cn/upload/logo/1214.jpg"></a>
+            <div>
+              <p><span>集美大学诚毅学院创办于2003年，是经国家教育部批准、由集美大学与福建集美大学教育发展基金会按新模式新机制联合举办的独立...</span>【<a class="notext"
+                  target="_black" data-publish="28662" href="http://cyzsb.jmu.edu.cn/" style="padding: 0px;">进入官网</a>】<a
+                  data-publish="28662"> <span> 专业介绍 </span> </a><a data-publish="28662"> <span> 招生章程 </span> </a><a
+                  data-publish="28662"> <span> 招生计划 </span> </a><a data-publish="28662"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+        <tr class="line">
+          <td class="td-name hoverschoolname" style="color: red; display: table-cell;"><a data-publish="44140"
+              style="color: red;">河北环境工程学院</a></td>
+          <td style="display: table-cell;">河北</td>
+          <td style="display: table-cell;">普通本科</td>
+          <td style="display: table-cell;">197.8w</td>
+          <td style="display: table-cell;"><a href="https://answer.eol.cn/fillmess/index?id=2984&amp;source=gkcx_pc"
+              target="_blank"><i class="iconfont iconMessage"></i></a></td>
+          <td style="display: table-cell;"><button type="button" class="ant-btn clickbnt noneBorder"><i
+                class="iconfont icon-plus marginR2"></i><span>对比</span></button></td>
+          <td colspan="6" class="newtd" style="display: none;">
+            <table>
+              <tbody>
+                <tr class="line newline">
+                  <td class="td-name hoverschoolname" style="color: red; padding-left: 100px; text-align: left;"><a
+                      data-publish="44140" style="color: red;">河北环境工程学院</a></td>
+                  <td style="width: 8%;">河北</td>
+                  <td style="width: 155px;">普通本科</td>
+                  <td style="width: 15%;"> 197.8w</td>
+                  <td style="width: 15%;"><a href="https://answer.eol.cn/fillmess/index?id=2984&amp;source=gkcx_pc"
+                      target="_blank"><i class="iconfont iconMessage"></i></a></td>
+                  <td><button type="button" class="ant-btn clickbnt noneBorder"><i
+                        class="iconfont icon-plus"></i><span>对比</span></button></td>
+                </tr>
+              </tbody>
+            </table><a class="imga" target="_black" data-publish="44140"><img
+                src="https://static-data.eol.cn/upload/logo/2855.jpg"></a>
+            <div>
+              <p><span>地理位置：河北环境工程学院坐落在气候宜人、环境优美的避暑圣地河北省秦皇岛市北戴河区，拥有得天独厚的区位优势。秦皇岛是河北...</span>【<a class="notext"
+                  target="_black" data-publish="44140" href="https://zsjyc.hebuee.edu.cn/"
+                  style="padding: 0px;">进入官网</a>】<a data-publish="44140"> <span> 专业介绍 </span> </a><a
+                  data-publish="44140"> <span> 招生章程 </span> </a><a data-publish="44140"> <span> 招生计划 </span> </a><a
+                  data-publish="44140"><span> 联系方式 </span> </a></p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+    <script>
+
+      // $(window).load(function () {
+      //   $(".search-bar").fillHead();
+      //   $("#myTable").fixedTableHead(); 
+      // })
+      $(window).load(function () {
+        $("#myTable2").fixedTableHead("divScroll"); 
+      })
+      
+    </script>
+</html>

@@ -10,34 +10,118 @@
     <script src="../js/vue.js"></script>
     <style>
         .book-table{
-            /* border: 1px solid #000; */
+            border: 1px solid #000;
             padding:0;
             margin: 0;
+            text-align: center;
         }
-            th{
-                border: 1px solid #000;
-            }
+        th,td{
+            border: 1px solid #000;
+            padding: 4px 10px;
+        }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <table class="book-table" cellspacing="0">
-            <thead>
-                <tr>
-                    <th v-for="item in theadName">{{item}}</th>
-                </tr>
-            </thead>
-        </table>
+        <div v-if="bookList.length">
+            <table class="book-table" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th v-for="item in theadName">{{item}}</th>
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    <tr v-for="(item,index) in bookList">
+                        <td>{{index+1}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.date}}</td>
+                        <td>{{item.price | showPrice}}</td>
+                        <td>
+                            <div>
+                                <button @click='sub(index)' v-bind:disabled='item.num<=1'>-</button>{{item.num}}<button @click='add(index)'>+</button>
+                            </div>
+                        </td>
+                        <td><button @click="removeBook(index)">移除</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="totalPrice">
+                总价格:{{totalPrice | showPrice}}
+            </div>
+        </div>
+        <div v-else>
+            购物车为空！
+        </div>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                theadName:['书籍名称','出版日期','价格','购买数量','操作']
+                theadName:['','书籍名称','出版日期','价格','购买数量','操作'],
+                bookList:[
+                    {
+                        id:1,
+                        name:'数据结构',
+                        date:'2009-10-5',
+                        num:'1',
+                        price:88,
+                        
+                    },
+                    {
+                        id:2,
+                        name:'HTML5从入门到精通',
+                        date:'2015-1-5',
+                        num:'1',
+                        price:50,
+                        
+                    },
+                    {
+                        id:3,
+                        name:'JS高级教程（上）',
+                        date:'2012-03-03',
+                        num:'1',
+                        price:70,
+                        
+                    },
+                    {
+                        id:4,
+                        name:'玩转CSS3',
+                        date:'2019-10-5',
+                        num:'1',
+                        price:35,
+                        
+                    }
+                ]
             },
-            methods: {}
+            methods: {
+                add: function (index) {
+                    this.bookList[index].num++
+                },
+                sub: function (index) {
+                    let num =  this.bookList[index].num;
+                    this.bookList[index].num--
+                },
+                removeBook(index) {
+                    this.bookList.splice(index,1)
+                }
+            },
+            filters: {
+                showPrice(price){
+                    return '￥'+ price.toFixed(2)
+                }
+            },
+            computed: {
+                totalPrice() {
+                    let totalPrice = 0
+                    for (let i = 0 ;i < this.bookList.length ; i++){
+                        totalPrice += this.bookList[i].price*this.bookList[i].num;
+                    }
+                    return totalPrice
+                }
+            }
         });
     </script>
 </body>

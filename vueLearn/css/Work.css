@@ -1,0 +1,31 @@
+body {
+    background-color:#eee;
+}
+/* 数字背景 */
+.num-bcgcolor {
+    background-color:#f8f8f8;
+}
+/* 选中状态 */
+.active {
+    background-color:#7682b4;
+}
+/* 外间距 */
+.main-div {
+    margin: 20px 0  0 20px ;
+    padding: 10px 0 0 10px;
+    padding-bottom: 0;
+    margin: 0 auto;
+    width: 33%;
+}
+.check-div {
+    padding: 10px;
+}
+.shelf-num{
+    border: 1px solid #ddd;
+}
+.table-th {
+    background-color: #ddd;
+}
+.selAll{
+    text-align: left;
+}

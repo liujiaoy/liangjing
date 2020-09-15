@@ -1,0 +1,1293 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OrdersSearch.aspx.cs" Inherits="WebApp.GlassSales.OrdersSearch" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <link rel="stylesheet" type="text/css" href="../CSS/main.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/ligerUI/skins/Aqua/css/ligerui-dialog.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/ligerUI/skins/Gray/css/dialog.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/ligerUI/skins/Aqua/css/ligerui-grid.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/ligerUI/skins/ligerui-icons.css" />
+    <script type="text/javascript" src="../Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../lib/ligerUI/js/core/base.js"></script>
+    <script type="text/javascript" src="../Scripts/meizzDate.js"></script>
+    <script type="text/javascript" src="../lib/ligerUI/js/plugins/ligerToolBar.js"></script>
+    <script type="text/javascript" src="../lib/ligerUI/js/plugins/ligerDialog.js"></script>
+    <script type="text/javascript" src="../lib/ligerUI/js/plugins/ligerResizable.js"></script>
+    <script type="text/javascript" src="../js/jquery.fixedTableHead.js"></script>
+    <script type="text/javascript" src="../Scripts/common.js"></script>
+    <script type="text/javascript" src="../Scripts/LodopFuncs.js?v=20200422"></script>
+    <style>
+        #forPrintTable
+        {
+            width: 100%;
+        }
+
+        #gvPerson
+        {
+            width: 100%;
+            overflow-x: scroll;
+        }
+
+            #gvPerson td, #gvPerson th
+            {
+                /*所有列允许换行*/
+                border: 1px solid #888;
+                white-space: normal !important;
+                text-align: center;
+                padding-left: 0px !important;
+                /*word-break: break-all;*/
+                /*margin-bottom:2px !important;*/
+            }
+
+        th
+        {
+            white-space: normal !important;
+        }
+
+        #newPrintTable
+        {
+            display: none;
+        }
+        .CLodopNotice
+        {
+            position: fixed;
+            right: 0px;
+            z-index: 1000000;
+            background-color: #fff;
+            border: 1px solid red;
+            box-shadow: 0 0 10px #000;
+            border-radius: 10px 0 10px 10px;
+            padding: 10px;
+            display: inline-block;
+        }
+
+        .notEndPrint
+        {
+            display: none;
+        }
+
+        #newTableId th
+        {
+            border-left: 1px solid #ccc;
+            border-top: 1px solid #888 !important;
+            border-bottom: 1px solid #888 !important;
+        }
+
+        .btn
+        {
+            margin: 5px;
+            padding: 5px;
+        }
+
+        #newTableId .titlenumarea
+        {
+            border-bottom: 1px solid #ccc !important;
+        }
+    </style>
+    <script type="text/javascript">
+        $.ligerui.controls.Dialog.prototype._borderX = 1;
+        $.ligerui.controls.Dialog.prototype._borderY = 30;
+    </script>
+    <script type="text/javascript" src="../Scripts/JScript.js" language="javascript"></script>
+    <script type="text/javascript">
+        var win1;
+        //        function itemclick(item) {
+        //            //alert(document.documentElement.clientHeight);
+        //            var height = document.documentElement.clientHeight + 30;
+        //            if (height < 540)
+        //                height = 540
+        //            $.ligerDialog.open({ title: '新增订单信息', height: height, url: 'OrdersEditFirst.aspx', width: 1000, showMax: true, showToggle: true, showMin: false, isResize: true, slide: false });
+        //        }
+
+        function InitClass() {
+            jQuery("#ddlProductClass").empty();
+            $.get("../Ashx/AjaxHandler.ashx", { typevalue: $("#ddlProductType").val(), type: "1" },
+             function (data) {
+                 $("#ddlProductClass").append(data);
+                 $("#ddlProductClass ").val($("#hidProductClass").val());
+             });
+        }
+
+        function orderAdd(url) {
+            //alert(document.documentElement.clientHeight);
+            var height = document.documentElement.clientHeight + 30;
+            if (height < 540)
+                height = 540
+            win1 = $.ligerDialog.open({ title: '新增订单信息', height: height, url: url, width: 1000, showMax: true, showToggle: true, showMin: false, isResize: true, slide: false, backurl: "OrdersManage.aspx" });
+        }
+        $(function () {
+            $("#toptoolbar").ligerToolBar({
+                items: [
+
+                ]
+            });
+        });
+
+        function f_reload() {
+            window.location.href = window.location.href;
+        }
+
+        function f_open(url) {
+            var height = document.documentElement.clientHeight + 30;
+            if (height < 540)
+                height = 540
+            $.ligerDialog.open({ title: "订单信息", height: height, url: url, width: 1000, showMax: true, showToggle: true, showMin: false, isResize: true, slide: false });
+        }
+        function f_closeWindow() {
+            setTimeout(function () {
+                $.ligerDialog.close();
+                f_reload();
+            }, 200);
+        }
+
+        function f_del() {
+            //if (!v.form()) return false;
+            $.ligerDialog.waitting("数据处理中...");
+            return true;
+        }
+
+        function f_success() {
+            setTimeout(function () {
+                $.ligerDialog.closeWaitting();
+                $.ligerDialog.success('数据处理成功!', "提示", function () {
+                    f_reload();
+                });
+            }, 10);
+        }
+
+
+        function f_Message(str) {
+            setTimeout(function () {
+                $.ligerDialog.closeWaitting();
+                $.ligerDialog.success(str, "提示", function () {
+                    f_reload();
+                });
+            }, 10);
+        }
+
+
+
+        //获取url参数
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
+
+
+        //        function f_WindowOpen(url) {
+        //            var height = document.documentElement.clientHeight + 30;
+        //            if (height < 540)
+        //                height = 540
+        //            $.ligerDialog.open({ title: "订单信息", height: height, url: url, width: 1000, showMax: true, showToggle: true, showMin: false, isResize: true, slide: false });
+        //        }
+
+        function f_load() {
+            switch ($("#ddlSearchType").val())
+            {
+                case "0":
+                    $.ligerDialog.waitting("页面跳转中，请稍候。");
+                    window.location.href = "OrdersSearch.aspx";
+                    break;
+                case "1":
+                    $.ligerDialog.waitting("页面跳转中，请稍候。");
+                    window.location.href = "OrdersSearchNotEnd.aspx?NotEndType=1";
+                    break;
+                case "2":
+                    $.ligerDialog.waitting("页面跳转中，请稍候。");
+                    window.location.href = "OrdersSearchCount.aspx";
+                    break;
+                case "3":
+                    $.ligerDialog.waitting("页面跳转中，请稍候。");
+                    window.location.href = "OrdersSearchNotEndCount.aspx?NotEndType=1";
+                    break;
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <div class="fixedHead">
+                <%--            <div id="toptoolbar">
+            </div>--%>
+                <div style="display: none">
+                    <asp:Button ID="PlanOut" runat="server" Text="导出实际生产计划详情" OnClick="MergeExecl" />
+                    <asp:HiddenField ID="hideFileName" runat="server" />
+                </div>
+                <table align="center">
+                    <tr>
+                        <td>
+                            <asp:DropDownList ID="ddlSearchType" runat="server" onchange="f_load();">
+                                <asp:ListItem Value="0" Selected>订单进度明细查询</asp:ListItem>
+                                <asp:ListItem Value="1">未完成订单明细查询</asp:ListItem>
+                                <asp:ListItem Value="2">订单进度汇总查询</asp:ListItem>
+                                <asp:ListItem Value="3">未完成订单汇总查询</asp:ListItem>
+                            </asp:DropDownList></td>
+
+                        <td id="Td1" align="center">
+                            <asp:Label ID="Label1" runat="server" Text="" Width="100" Height="18"></asp:Label>
+                            <asp:Label ID="Label2" runat="server" Text="" Width="100" Height="18"></asp:Label>
+                            <asp:Label ID="Label3" runat="server" Text="" Width="100" Height="18"></asp:Label>
+                            <%--                    <asp:Label ID="Label4" runat="server" Text="" Width="100" Height="18"></asp:Label>--%>
+                            <asp:Label ID="Label6" runat="server" Text="" Width="100" Height="18"></asp:Label>
+                            <asp:Label ID="Label5" runat="server" Text="" Width="100" Height="18"></asp:Label>
+
+                        </td>
+                        <td id="Td2" align="center">
+                            <asp:Button ID="Button1" runat="server" Text="有空按一下，手动导入5天内的出库数据"
+                                OnClick="Button1_Click" Visible="false" />
+                            <asp:Literal ID="Literal1" runat="server"></asp:Literal>
+                        </td>
+                        <td id="Td3" align="center"></td>
+                        <td id="Td4" align="center"></td>
+                    </tr>
+                </table>
+
+                <table border="0" cellspacing="1" cellpadding="1" style="width: 100%">
+                    <tr>
+                        <td>客户名称:
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtCustomerName" runat="server" Width="120" CssClass="ipt"></asp:TextBox>
+                        </td>
+
+
+
+                        <td>订单编号:
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtOrderCode" runat="server" Width="90" CssClass="ipt"></asp:TextBox>
+                        </td>
+
+                        <td>订单外部编号:
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtOrderOutCode" runat="server" Width="90" CssClass="ipt"></asp:TextBox>
+                        </td>
+                        <%--<td>
+                    批次号：
+                </td>
+                <td>
+                    <asp:TextBox ID="TextBox1" runat="server" Width="90" CssClass="ipt"></asp:TextBox>
+                </td>--%>
+
+
+                        <td align="center">客服经理:
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlMerchandiser" runat="server" Width="70">
+                                <asp:ListItem Value=""></asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+
+                        <td>订单状态:
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlOrderType" runat="server" Width="80">
+                                <asp:ListItem Value="">                  
+                                </asp:ListItem>
+                                <%--                        <asp:ListItem Value="0">
+                    已录入
+                        </asp:ListItem>
+                        <asp:ListItem Value="1">
+                    审核中
+                        </asp:ListItem>--%>
+                                <asp:ListItem Value="2">
+                    已审核
+                                </asp:ListItem>
+                                <asp:ListItem Value="3">
+                    已分组
+                                </asp:ListItem>
+                                <asp:ListItem Value="4">
+                    分架中
+                                </asp:ListItem>
+                                <asp:ListItem Value="5">
+                    已分架
+                                </asp:ListItem>
+                                <asp:ListItem Value="6">
+                    生产中
+                                </asp:ListItem>
+                                <%--                        <asp:ListItem Value="7">
+                    已完成
+                        </asp:ListItem>--%>
+                                <asp:ListItem Value="8">
+                    入库完成
+                                </asp:ListItem>
+                                <%--                        <asp:ListItem Value="9">
+                    出库完成
+                        </asp:ListItem>
+                        <asp:ListItem Value="1000">
+                    已冻结
+                        </asp:ListItem>
+                        <asp:ListItem Value="1001">
+                    已作废
+                        </asp:ListItem>--%>
+                            </asp:DropDownList>
+                        </td>
+
+
+                        <%--                <td>
+                    生产工厂：
+                    <asp:Literal ID="Literal1" runat="server"></asp:Literal>
+                </td>--%>
+                        <td>生产工厂:
+
+                        </td>
+                        <td>
+
+                            <asp:DropDownList ID="ddlFactory" runat="server">
+                                <asp:ListItem Value="">
+                    
+                                </asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                        <td>下单日期:
+                        </td>
+                        <td colspan="3">
+                            <asp:TextBox ID="StartDate" runat="server" Width="105" CssClass="ipt" onclick="calendarEx(this)"></asp:TextBox>
+                            ~
+                    <asp:TextBox ID="EndDate" runat="server" Width="105" CssClass="ipt" onclick="calendarEx(this)"></asp:TextBox>
+                        </td>
+
+                        <td colspan="3">
+                            <%--                    只查未完成订单<asp:CheckBox ID="cbNotEndType" runat="server"/>--%>
+                        </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>项目名称:
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtProjectName" runat="server" Width="120" CssClass="ipt"></asp:TextBox>
+                        </td>
+
+                        <td>合同编号:
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtContractCode" runat="server" Width="90" CssClass="ipt"></asp:TextBox>
+                        </td>
+                        <td>合同外部编号:
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtOutCode" runat="server" Width="90" CssClass="ipt"></asp:TextBox>
+                        </td>
+                        <td align="center">销售经理：
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlSalesman" runat="server" Width="70">
+                                <asp:ListItem Value=""></asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+
+
+                        <td>产品大类:
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlProductType" runat="server" Width="80">
+                                <asp:ListItem Value="">
+                    
+                                </asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                        <td>产品小类:
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlProductClass" runat="server" AutoPostBack="false">
+                                <asp:ListItem Value="">
+                    
+                                </asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+
+                        <td>产品名称:
+                        </td>
+                        <td>
+
+                            <asp:TextBox ID="txtProductName" runat="server" CssClass="ipt" Width="120"></asp:TextBox>
+                        </td>
+                        <td>批次号:
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtPoCode" runat="server" CssClass="ipt" Width="90"></asp:TextBox>
+                        </td>
+
+                        <td colspan="1" align="center">
+                            <asp:Button ID="Button2" runat="server" Text="搜索" OnClick="btnSearch_Click" CssClass="btn" UseSubmitBehavior="false" />
+
+                        </td>
+                        <td>
+                            <div onclick="showAll(this)" class="showAll btn">展开条目进度</div>
+                        </td>
+                        <%--<td ><div onclick="appendProcessList()" class="openProcess btn">查看工序进度</div></td>--%>
+                        <td class="normalPrint" width="50">
+                            <div onclick="PreviewMytable()" class="btn">导出</div>
+                        </td>
+                        <%--                    <td style="padding-left:10px;"><asp:Button ID="Button3" runat="server" Text="导出未完成订单" OnClientClick="MergeExecl();return false;" Visible="false" CssClass="btn"/></td>--%>
+
+                        <%--<td ><input type="text" value="" id="T2"/></td>--%>
+                    </tr>
+                </table>
+            </div>
+            <div id="forPrintTable">
+                <asp:GridView ID="gvPerson" HorizontalAlign="left" runat="server" AutoGenerateColumns="False"
+                    CssClass="fontbl2" CellPadding="1" CellSpacing="0" ForeColor="#333333" AllowPaging="False"
+                    DataKeyNames="OrderCode" OnRowDataBound="gvPerson_RowDataBound">
+                    <Columns>
+                        <asp:TemplateField HeaderText="序号">
+                            <ItemStyle Width="50px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="50px" />
+                            <ItemTemplate>
+                                <asp:Literal ID="ltlNum" runat="server"></asp:Literal>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="订单编号">
+                            <ItemTemplate>
+                                <a href="javascript:f_open('OrdersView.aspx?OrderCode=<%#Eval("OrderCode") %>')">
+                                    <%#Eval("OrderCode") %></a>
+                            </ItemTemplate>
+                            <ItemStyle Width="100px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="100px" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="订单外部编号">
+                            <ItemTemplate>
+                                <%#Eval("OrderOutCode") %></a>
+                            </ItemTemplate>
+                            <ItemStyle Width="130px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="130px" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="批次号">
+                            <ItemTemplate>
+                                <%#Eval("POCode") %></a>
+                            </ItemTemplate>
+                            <ItemStyle Width="90px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="90px" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="客户名称">
+                            <ItemTemplate>
+                                <%#Eval("CustomerName")%>
+                            </ItemTemplate>
+                            <ItemStyle Width="150px" HorizontalAlign="left" />
+                            <HeaderStyle Width="150px" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="合同编号">
+                            <ItemTemplate>
+                                <%#Eval("ContractCode") %>
+                            </ItemTemplate>
+                            <ItemStyle Width="105px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="105px" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="合同外部编号">
+                            <ItemTemplate>
+                                <%#Eval("OutCode") %>
+                            </ItemTemplate>
+                            <ItemStyle Width="105px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="105px" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="项目名称">
+                            <ItemTemplate>
+                                <%#Eval("ProjectName")%>
+                            </ItemTemplate>
+                            <ItemStyle Width="180" HorizontalAlign="left" />
+                            <HeaderStyle Width="180" />
+                        </asp:TemplateField>
+
+
+                        <asp:TemplateField HeaderText="订单项目名称">
+                            <ItemTemplate>
+                                <%#Eval("OrderProjectName")%>
+                            </ItemTemplate>
+                            <ItemStyle Width="180" HorizontalAlign="left" />
+                            <HeaderStyle Width="180" />
+                        </asp:TemplateField>
+
+
+                        <asp:TemplateField HeaderText="客户产品名称">
+                            <ItemTemplate>
+                                <%#Eval("ProductCustomerName")%>
+                            </ItemTemplate>
+                            <ItemStyle Width="180" HorizontalAlign="left" />
+                            <HeaderStyle Width="180" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="订单配置">
+                            <ItemTemplate>
+                                <%#Eval("ProductName")%>
+                            </ItemTemplate>
+                            <ItemStyle Width="180px" HorizontalAlign="left" />
+                            <HeaderStyle Width="180px" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="合同配置">
+                            <ItemTemplate>
+                                <%#Eval("ProductNameC")%>
+                            </ItemTemplate>
+                            <ItemStyle Width="180px" HorizontalAlign="left" />
+                            <HeaderStyle Width="180px" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="产品分类">
+                            <ItemTemplate>
+                                <%#Eval("BigClass")%>
+                            </ItemTemplate>
+                            <ItemStyle Width="90px" HorizontalAlign="left" />
+                            <HeaderStyle Width="90px" />
+                        </asp:TemplateField>
+
+
+
+                        <asp:TemplateField HeaderText="价格">
+                            <ItemTemplate>
+                                <%#Eval("ProductPrice")%>
+                            </ItemTemplate>
+                            <ItemStyle Width="90px" HorizontalAlign="left" />
+                            <HeaderStyle Width="90px" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="下单日期">
+                            <ItemTemplate>
+                                <%#Eval("orderCustomerDate","{0:yyyy-MM-dd}")%>
+                            </ItemTemplate>
+                            <ItemStyle Width="90px" HorizontalAlign="left" />
+                            <HeaderStyle Width="90px" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="异形">
+                            <ItemTemplate>
+                                <%# Eval("IsAbnormity").ToString()=="1"?"是":"否"%>
+                            </ItemTemplate>
+                            <ItemStyle Width="50px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="50px" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="飞边">
+                            <ItemTemplate>
+                                <%# Eval("DistinctSize").ToString()=="1"?"是":"否"%>
+                            </ItemTemplate>
+                            <ItemStyle Width="50px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="50px" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="打孔">
+                            <ItemTemplate>
+                                <%# Eval("AdgeSeatType").ToString()=="1"?"是":"否"%>
+                            </ItemTemplate>
+                            <ItemStyle Width="50px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="50px" />
+                        </asp:TemplateField>
+
+
+<%--                        <asp:TemplateField HeaderText="飞边">
+                            <ItemTemplate>
+                                <%# Eval("DistinctSize").ToString()=="1"?"是":"否"%>
+                            </ItemTemplate>
+                            <ItemStyle Width="50px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="50px" />
+                        </asp:TemplateField>--%>
+
+                        <asp:TemplateField HeaderText="挖缺">
+                            <ItemTemplate>
+                                <%# Eval("IsDigChip").ToString()=="1"?"是":"否"%>
+                            </ItemTemplate>
+                            <ItemStyle Width="50px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="50px" />
+                        </asp:TemplateField>
+
+
+                        <asp:TemplateField HeaderText="胶深">
+                            <ItemTemplate>
+                                <%# Eval("GlueDeep")%>
+                            </ItemTemplate>
+                            <ItemStyle Width="70px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="70px" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="胶型">
+                            <ItemTemplate>
+                                <%# Eval("GlueTypeName")%>
+                            </ItemTemplate>
+                            <ItemStyle Width="70px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="70px" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="产品厚度">
+                            <ItemTemplate>
+                                <%# Eval("GlassThickness")%>
+                            </ItemTemplate>
+                            <ItemStyle Width="70px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="70px" />
+                        </asp:TemplateField>
+
+
+                        <asp:TemplateField HeaderText="订单状态">
+                            <ItemTemplate>
+                                <%#Eval("OrderTypeName")%>
+                                <asp:HiddenField ID="hidOrderType" runat="server" Value='<%#Eval("OrderType")%>' />
+                                <asp:HiddenField ID="hidMerchandiser" runat="server" Value='<%#Eval("Merchandiser")%>' />
+                            </ItemTemplate>
+                            <ItemStyle Width="80px" HorizontalAlign="Center" />
+                            <HeaderStyle Width="80px" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="客服经理">
+                            <ItemTemplate>
+                                <%#Eval("MerchandiserName")%>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" Width="80px" />
+                            <HeaderStyle Width="80px" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="销售经理">
+                            <ItemTemplate>
+                                <%#Eval("SalesmanName")%>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" Width="80px" />
+                            <HeaderStyle Width="80px" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="销售公司">
+                            <ItemTemplate>
+                                <%#Eval("CompanyName")%>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" Width="100px" />
+                            <HeaderStyle Width="100px" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="操作">
+                            <ItemStyle Width="50px" HorizontalAlign="Center" CssClass="oprate" />
+                            <HeaderStyle Width="50px" CssClass="oprate" />
+                            <ItemTemplate>
+                                <asp:HyperLink ID="HyperLink1" runat="server">跟踪</asp:HyperLink>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+
+                        <asp:TemplateField HeaderText="架卡">
+                            <ItemStyle Width="50px" HorizontalAlign="Center" CssClass="oprate" />
+                            <HeaderStyle Width="50px" CssClass="oprate" />
+                            <ItemTemplate>
+                                <asp:HyperLink ID="HyperLink2" runat="server">架卡</asp:HyperLink>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="查看明细">
+                            <ItemStyle Width="50px" HorizontalAlign="Center" CssClass="oprate" />
+                            <HeaderStyle Width="50px" CssClass="oprate" />
+                            <ItemTemplate>
+                                <a onclick="showOne('<%#Eval("OrderCode") %>',this)" style="cursor: pointer; color: #006699" class="showDetail">查看明细</a>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+
+                    </Columns>
+                    <RowStyle BackColor="#FFFFFF" ForeColor="#000000" />
+                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                    <PagerSettings Visible="False" />
+                </asp:GridView>
+            </div>
+            <br>
+            <asp:Pager ID="ListPager" runat="server" DisplayLanguage="Chinese" DisplayMode="Text"
+                DisplayUnit="条" Pagefix="page" />
+            <input id="num" type="hidden" value="0" />
+        </div>
+    </form>
+</body>
+<script type="text/javascript">
+    // 获取当页订单数，订单号列表
+    var OrderCodeNum = 0;
+    var OrderCodeList = [];
+    var DateNow;
+    // 获取当前页的订单号
+    function getOrderCodeNum() {
+        var Trs = $("#gvPerson>tbody>tr");
+        OrderCodeList = [];
+        var trs = $("#gvPerson>tbody>tr")
+        for (var i = 0 ; i < trs.length; i++) {
+            var elemt = trs.eq(i);
+            var orderCode = elemt.attr("class");
+            if (orderCode != "") {
+                OrderCodeList.push(orderCode);
+            }
+        }
+        $.unique(OrderCodeList);
+        OrderCodeNum = OrderCodeList.length;
+        pagestotal = OrderCodeNum;
+        //console.log(OrderCodeList)
+    }
+    $(document).ready(function () {
+        var Trs = $("#gvPerson>tbody>tr");
+        var theadHtml = "<thead><tr>" + Trs.eq(0).html() + "</tr></thead>"
+        $("#gvPerson").prepend(theadHtml)
+        Trs.eq(0).remove();
+        for (var i = 0; i < Trs.length; i++) {
+            var id = $.trim(Trs.eq(i).find("td").eq(1).text())
+            Trs.eq(i).attr("id", id)
+            // 订单号设为id和class，之后需要用到
+            Trs.eq(i).attr("class", id)
+        }
+
+
+        // 获取当前页的订单号
+        getOrderCodeNum();
+        $("#gvPerson>tbody").on("click", "tr", function () {
+
+            if ($(this).find("td").length > 0) {
+                removeColor()
+                var id = $.trim($(this).attr("class"))
+                $("." + id).css({
+                    "border": "1px solid #000",
+                    "font-weight": "bold"
+                })
+
+
+            }
+
+        })
+
+    })
+    function removeColor() {
+
+        for (var i = 0; i < OrderCodeList.length; i++) {
+            $("." + OrderCodeList[i]).css({
+                "border": "1px solid #888",
+                "font-weight": "normal"
+            })
+        }
+    }
+
+    $(window).load(function () {
+        //固定表头
+        $(".fixedHead").fillHead();
+        $("#gvPerson").fixedTableHead();
+       
+
+    })
+    //单条加载
+    function showOne(ordercode, e) {
+        var _this = $(e);
+
+        //第一个加载的条目，需要加载明细表头
+        if ($("#gvPerson>thead>tr").length == 1) {
+            appendTh()
+            $(".fixedHead").fillHead();
+        }
+        //明细首次加载请求ajax，
+        if ($("#" + ordercode).length > 0) {
+            $.ligerDialog.waitting("数据加载中，请稍候...")
+            //进度条加载
+            //startSchedule(e)
+            //pagestotal = 2;
+
+            searchlistData(ordercode, "one");
+            _this.html("收起")
+            _this.addClass("open")
+        } else {
+            //其他时候控制显隐
+            if (_this.html() == "收起") {
+                _this.removeClass("open")
+                if ($(".open").length == 0) {
+                    location.reload();
+                    return 0;
+                }
+                //$(".numlist").hide()
+                $("." + ordercode).find("td").hide()
+                $("." + ordercode).find(".rowspanmore").show()
+                _this.html("查看明细")
+                
+            } else {
+                _this.addClass("open")
+                $(".numlist").show()
+                var parcents = (((AllProcessArr.length + 20) * 50 / ($(window).width())) + 1) * 100
+                $("#forPrintTable").width(parcents + "%")
+                $("." + ordercode).find("td").show()
+                $("#gvPerson").find("th").show()
+                _this.html("收起")
+            }
+            sumSomething();
+        }
+
+    }
+    //展开全部与收起全部，收起全部在数据量较大浏览器版本较低时会卡死,所以暂不启用
+    function showAll(_this,exporttype) {
+        //第一个加载的条目，需要加载明细表头
+        if ($("#gvPerson>thead>tr").length == 1) {
+            appendTh()
+            $(".fixedHead").fillHead();
+        }
+        //判断是否有订单
+        if (OrderCodeNum > 0 && $("#num").val() != OrderCodeNum) {
+            $("#gvPerson td").show()
+            $(".showDetail").each(function () {
+                $(this).text("收起")
+                $(this).addClass("open")
+            })
+            //加载全部，已加载的不重复加载
+            startSchedule(_this)
+            pagestotal = OrderCodeNum;
+            
+            //$.ligerDialog.waitting("数据加载中，请稍候...")
+
+            for (var i = 0; i < OrderCodeNum; i++) {
+                //判断是否加载过，id存在则未加载过         
+                if ($("#" + OrderCodeList[i]).length > 0) {
+
+                    searchlistData(OrderCodeList[i], "all", exporttype);
+                   
+                }
+
+            }
+        }
+        else {
+            if ($(".showAll").text() == "展开条目进度") {
+                $(".showDetail").each(function () {
+                    $(this).text("收起")
+                })
+
+                $("#gvPerson td").show()
+                $("#gvPerson th").show()
+                $(".numlist").show()
+
+            } else {
+                $("#forPrintTable").width("100%")
+                $(".showDetail").each(function () {
+                    $(this).text("查看明细")
+                })
+                $(".numlist").hide()
+
+                $("#gvPerson td").not(".rowspanmore").hide()
+                $(".showAll").text("展开条目进度")
+
+            }
+            sumSomething()
+        }
+
+    }
+
+    function startSchedule(_this) {
+        //进度条
+        DateNow = new Date();  //开始时间
+        startDate = new Date();
+        MaskWH();
+        Appendschedulehtml(_this);
+    }
+    //添加订单条目，工序明细表头，表头从一行变成了两行（这样做显示比较混乱，但宽度适配性较好）
+    function appendTh() {
+        //工序明细表头
+        GetAllProcess()
+        var Thead = $("#gvPerson>thead>tr").eq(0);
+
+        Thead.find("th").attr("rowspan", 2)
+        Thead.append("<th width='50' class='numlist' rowspan='2'>条目</th><th width='80' class='numlist' rowspan='2'>宽</th><th width='80' class='numlist' rowspan='2'>高</th><th width='50' class='numlist' rowspan='2'>数量</th><th width='80' class='numlist' rowspan='2'>结算面积</th>"
+            + " <th width='100' class='numlist' rowspan='2'>安装编号</th>"
+            + " <th width='100' class='numlist' rowspan='2'>条目备注</th>"
+            + " <th width='50' class='numlist' rowspan='2'>图号</th>"
+            + " <th width='50' class='numlist' rowspan='2'>弯钢半径</th>"
+
+            + " <th width='50' class='numlist titlenumarea' colspan='2'>入库</th><th width='50' class='numlist titlenumarea' colspan='2'>发货</th><th width='50' class='numlist titlenumarea' colspan='2'>退库</th>"
+            + " <th width='50' class='numlist titlenumarea' colspan='3'>需发</th>"
+            + " <th width='50' class='numlist titlenumarea' colspan='3'>可发</th>"
+            + " <th width='50' class='numlist titlenumarea' colspan='3'>未入库</th>")
+        $("#gvPerson>thead").append("<tr><th class='numlist'>数量</th><th class='numlist'>面积</th><th class='numlist'>数量</th><th class='numlist'>面积</th><th class='numlist'>数量</th><th class='numlist'>面积</th><th class='numlist'>数量</th><th class='numlist'>面积</th><th class='numlist'>金额</th><th class='numlist'>数量</th><th class='numlist'>面积</th><th class='numlist'>金额</th>"
+            + " <th class='numlist'>数量</th><th class='numlist'>面积</th><th class='numlist'>金额</th>"
+            + "</tr>")
+
+    }
+        var AllProcessArr = [];
+        //获取所有工序
+        function GetAllProcess() {
+            $.ajax({
+                type: "get",
+                url: "../Ashx/AjaxProduce.ashx",
+                cache: false,
+                async: true,
+                data: { type: "GetAllProcess" },
+                success: function (data) {
+                    var data1 = JSON.parse(data)
+                    for (var i = 0 ; i < data1.length; i++) {
+
+                        AllProcessArr.push(data1[i].ProcessId);
+                    }
+                    appendProcessTh(data)
+                    //工序TD列
+                    appendProcessNum(data)
+
+
+                }
+            });
+        }
+
+
+        //请求条目信息ajax
+        function searchlistData(id, type, exporttype) {
+
+            var OrderCode = id;
+            
+            $.ajax({
+                type: "get",
+                url: "../Ashx/AjaxProduce.ashx",
+                cache: false,
+                async: true,
+                data: { type: "GetOrderItemFeed", OrderCode: OrderCode },
+                success: function (data) {
+                    if (data != "") {
+                        var data1 = JSON.parse(data);
+                        console.log(data1)
+                        var TemplateObj = {};
+                        var num = data1.TemplateNum.length;
+                        var TemplateTds = "";
+                        for (var i = 0; i < num - 1; i++) {
+                            TemplateTds += "<tr>"
+                                + "<td width=\"50\"></td>"
+                                + "<td width=\"50\"></td>"
+                                + TDS
+                                + "</tr>";
+                        }
+                        TemplateObj.TemplateTds = TemplateTds;
+                        TemplateObj.TemplateNum = num;
+                        appendOrderItemlist(id, type, exporttype, TemplateObj);
+                    }
+                }
+            });
+           
+        }
+        function appendOrderItemlist(id, type, exporttype, TemplateObj) {
+            $.ajax({
+                type: "get",
+                url: "../Ashx/AjaxProduce.ashx",
+                cache: false,
+                async: true,
+                data: { type: "getOrderProgressInfo", OrderCode: OrderCode },
+                success: function (data) {
+                    var data1 = JSON.parse(data)
+                    if (data1.length > 0) {
+                        // rowspanmore：标识最初加载的数据（订单基础信息）
+                        $("#" + id).find("td").addClass("rowspanmore");
+                        console.log(TemplateObj.TemplateNum)
+                        $("." + id).find(".rowspanmore").attr("rowspan", data1.length * TemplateObj.TemplateNum);
+                        var str = $("#" + id).html();
+                        var color = $("#" + id).css("background-color")
+                        var html = ""
+                        for (var i = 0; i < data1.length; i++) {
+                            // 第一行信息完整，跨行，剩下的行只需要条目详情
+                            if (i == 0) {
+                                html += "<tr id=" + data1[i].ItemId + " class=" + id + ">" + str
+
+                            } else {
+                                html += "<tr id=" + data1[i].ItemId + " class=" + id + ">"
+                            }
+                            html += "<td width='50' class='item'>" + data1[i].OrderItemId + "</td>"
+
+                                 + "<td width='80' class='item'>" + data1[i].ItemWidth + "</td>"
+                                 + "<td width='80' class='item'>" + data1[i].ItemHeight + "</td>"
+                                 + "<td width='50' class='item'  xformat=\"#0\">" + data1[i].ItemNum + "</td>"
+                                 //+ "<td width='80' class='item' xformat=\"##0.0##\">" + (data1[i].TrueArea * data1[i].ItemNum).toFixed(2) + "</td>"
+                                 + "<td width='80' class='item' xformat=\"##0.0##\">" + data1[i].ItemArea + "</td>"
+                                + "<td width='100' class='item'>" + data1[i].ItemCode + "</td>"
+                                + "<td width='100' class='item'>" + data1[i].ItemIntro + "</td>"
+                                 + "<td width='50' class='item'>" + data1[i].ItemDrawingNo + "</td>"
+                                 + "<td width='50' class='item'>" + (data1[i].ItemBendRadius == 0 ? "" : data1[i].ItemBendRadius) + "</td>"
+
+
+                                + "<td width='50' class='item' xformat=\"#0\">" + data1[i].ItemInNum + "</td>"
+                                + "<td width='50' class='item' xformat=\"##0.0##\">" + data1[i].ItemInArea + "</td>"
+
+                                + "<td width='50' class='item' xformat=\"#0\">" + data1[i].ItemOutNum + "</td>"
+                                + "<td width='50' class='item' xformat=\"##0.0##\">" + data1[i].ItemOutArea + "</td>"
+
+                                + "<td width='50' class='item' xformat=\"#0\">" + data1[i].ItemInNum_Tk + "</td>"
+                                + "<td width='50' class='item' xformat=\"##0.0##\">" + data1[i].ItemInArea_Tk + "</td>"
+
+                                + "<td width='50' class='item' xformat=\"#0\">" + data1[i].ItemNeedOutNum + "</td>"
+                                + "<td width='50' class='item' xformat=\"##0.0##\">" + data1[i].ItemNeedOutArea + "</td>"
+                                + "<td width='50' class='item' xformat=\"##0.0##\">" + (data1[i].ItemNeedOutNum * data1[i].OneItemPrice).toFixed(2) + "</td>"
+
+                                + "<td width='50' class='item' xformat=\"#0\">" + data1[i].ItemCanOutNum + "</td>"
+                                + "<td width='50' class='item' xformat=\"##0.0##\">" + data1[i].ItemCanOutArea + "</td>"
+                                + "<td width='50' class='item' xformat=\"##0.0##\">" + (data1[i].ItemCanOutNum * data1[i].OneItemPrice).toFixed(2) + "</td>"
+
+                                + "<td width='50' class='item' xformat=\"#0\">" + (data1[i].ItemNeedOutNum - data1[i].ItemCanOutNum) + "</td>"
+                                + "<td width='50' class='item' xformat=\"##0.0##\">" + ((data1[i].ItemNeedOutNum - data1[i].ItemCanOutNum) * data1[i].TrueArea).toFixed(2) + "</td>"
+                                + "<td width='50' class='item' xformat=\"##0.0##\">" + ((data1[i].ItemNeedOutNum - data1[i].ItemCanOutNum) * data1[i].OneItemPrice).toFixed(2) + "</td>"
+                                + TDS
+                                + "</tr>";
+                            html += TemplateObj.TemplateTds;
+                        }
+                        // 新人换旧人
+                        // 这个写法不兼容，在ie9及以下版本报错
+                        //$("#" + id).attr("outerHTML", html);
+                        $("#" + id).after(html);
+                        $("#" + id).remove();
+
+                        $("." + id).css("background-color", color)
+                        $("." + id).find(".item").attr("rowspan", TemplateObj.TemplateNum)
+                        //searchProcessData(OrderCode, color, type, exporttype);
+
+                        //console.timeEnd("请求条目信息ajax")
+                    }
+                },
+                error: function () {
+                    $.ligerDialog.closeWaitting();
+                    $.ligerDialog.warn("网络错误")
+                }
+            });
+        }
+
+        //添加工序信息ajax
+        function searchProcessData(FeedData) {
+           
+            // 工序数据标识，空为有该工序，/为此订单无该工序
+            fillDatanull(FeedData.ProcessList, id);
+            // 工序数据填充
+            fillData(FeedData.FeedNumList);
+
+            //isFinished(type, OrderCode, exporttype);
+        }
+                
+
+        
+
+        function isFinished(type, OrderCode, exporttype) {
+            //记录加载了几条，用于判断条目是否加载完成
+            var num = $("#num").val();
+            $("#num").val(parseInt(num) + 1);
+        
+            if (type == "one") {
+                //单条加载 
+                if ($("#sum").length == 0) {
+                    var trth = $("." + OrderCode).eq(0).clone().attr("id", "sum")
+                    $("#gvPerson").append("<tfoot></tfoot>")
+                    $("#gvPerson tfoot").append(trth)
+                    $("#sum").attr("class", "")
+                }
+                sumSomething();
+                //$.ligerDialog.closeWaitting();
+                ClearscheduleStyle();
+            } else {
+                // 全部加载
+                Page = num;
+                UseTime(DateNow);
+                if (num == OrderCodeNum - 1) {
+                    var parcents = (((AllProcessArr.length + 20) * 50 / ($(window).width())) + 1) * 100
+                    $("#forPrintTable").width(parcents + "%")
+                    //$.ligerDialog.closeWaitting();
+                    ClearscheduleStyle();
+                    //合计
+                    sumSomething();
+                    if (exporttype == "forexport") {
+                        PreviewMytable();
+                    }
+                }
+
+            }
+
+        }
+
+        //工序th填充
+        function appendProcessTh(data) {
+            var data = JSON.parse(data)
+            var ths = '<th width="50" class="numlist" rowspan="2">层序</th><th width="50" class="numlist" rowspan="2">磨边方式</th>';
+            var ths1 = '';
+            for (var i = 0 ; i < data.length; i++) {
+                ths += '<th width="50" class= "numlist titlenumarea ' + data[i].ProcessId + '" colspan="2">' + data[i].ProcessName + '</th>'
+                ths1 += '<th class="numlist">数量</th><th class="numlist">面积</th>'
+                //+ '<th width="40" class= "numlist ' + data[i].ProcessId + '">' + data[i].ProcessName + '面积' + '</th>';
+            }
+            $("#gvPerson>thead>tr").eq(0).append(ths)
+            $("#gvPerson>thead>tr").eq(1).append(ths1);
+            //appendTfoot()
+            //固定表头
+            var parcents = (((AllProcessArr.length + 20) * 50 / ($(window).width())) + 1) * 100
+            $("#forPrintTable").width(parcents + "%")
+            $("#gvPerson").fixedTableHead();
+
+
+        }
+        //合计
+        function appendTfoot(e) {
+
+            $("#gvPerson").append("<tfoot><tr id=\"sum\"></tr></tfoot>")
+            $("#sum").html($("#gvPerson>thead>tr").eq(0).html())
+            var tdnum = 0;
+            $("#gvPerson>thead>tr").eq(0).find("th").each(function () {
+                var num = $(this).attr("colspan")
+                if (num != undefined) {
+                    num = 1
+                }
+
+            })
+            var html = "";
+            for (var i = 0; i < tdnum; i++) {
+                html += "<td></td>"
+            }
+            $("#sum").html(html)
+        }
+
+        var TDS = "";
+        //工序td填充
+        function appendProcessNum(data) {
+            var data = JSON.parse(data)
+            var tds = "";
+            for (var i = 0 ; i < data.length; i++) {
+                tds += "<td width=\"50\" class=" + data[i].ProcessId + " xformat=\"#0\">/</td>"
+                + "<td width=\"50\" class=" + data[i].ProcessId + " xformat=\"##0.0##\">/</td>";
+            }
+            TDS = tds;
+        }
+
+
+        //工序数据填充
+        function fillData(FeedNumList) {
+            //console.log(FeedNumList)
+            for (var i = 0; i < FeedNumList.length; i++) {
+                // id2 条目id+层序
+                var id2 = "" + FeedNumList[i].ItemId + FeedNumList[i].TemplateNum;
+                $("#" + id2).find("." + FeedNumList[i].ProcessId).eq(0).html(FeedNumList[i].FNum)
+                $("#" + id2).find("." + FeedNumList[i].ProcessId).eq(1).html(FeedNumList[i].FSqm)
+            }
+        }
+        //工序填充空,用于标识此订单是否经过此工序
+        function fillDatanull(ProcessList, id) {
+            for (var i = 0; i < ProcessList.length; i++) {
+                $("." + id).find("." + ProcessList[i].ProcessId).html(" ")
+            }
+        }
+
+
+        //导出的表格内容，需要导出的数据才导出
+        function newPrintTable() {
+            if ($("#newPrintTable").length > 0) {
+                $("#newPrintTable").remove()
+            }
+
+            var str = $("#gvPerson").clone().attr("id", "newPrintTable");
+            $("body").append(str);
+            $("#newPrintTable").css("width", "200%")
+            for (var i = 0; i < $("#newPrintTable tr").length; i++) {
+                var tr = $("#newPrintTable tr").eq(i);
+                tr.find(".oprate").remove();
+                for (var j = 0; j < tr.find("td").length; j++) {
+                    var td = tr.find("td").eq(j)
+                    td.html(td.text().replace(/\//, ""));
+                }
+            }
+
+        }
+        //lodop导出当前页
+        var LODOP; //声明为全局变量   
+        function PreviewMytable() {
+            //判断是否有订单
+            if (OrderCodeNum > 0) {
+                if (OrderCodeNum == $("#num").val()) {
+                    showAll();
+                } else if ($(".rowspanmore").length > 0) {
+                    $.ligerDialog.confirm('导出将加载本页所有条目进度，是否继续', function (yes) {
+                        if (yes) {
+                            showAll("forexport");
+                        }
+                    });
+                    return false;
+                }
+                newPrintTable();
+                var outerhtml = document.getElementById("newPrintTable").outerHTML
+                outerhtml = outerhtml.replace(/\s+/g, ' ')
+                LODOP = getLodop();
+                //使用lodop的话，LODOP.VERSION为undefined表示未安装
+                //使用clodop，LODOP为undefined表示未安装
+                if ((LODOP == undefined) || (LODOP.VERSION == undefined)) {
+                    $.ligerDialog.warn("导出控件未安装，请按提示进行安装！")
+                } else {
+                    LODOP.PRINT_INIT("");
+                    LODOP.ADD_PRINT_TABLE(20, 20, "100%", "100%", outerhtml);
+
+                    LODOP.SET_SAVE_MODE("QUICK_SAVE", true);//快速生成（无表格样式,数据量较大时或许用到） 
+                    var timestamp = new Date().getTime();
+                    LODOP.SAVE_TO_FILE("订单明细进度查询" + timestamp + ".xls");
+                }
+                $("#newPrintTable").remove();
+
+
+            } else {
+                $.ligerDialog.warn("暂无数据可导出")
+            }
+        }
+        //当页合计
+        function sumSomething() {
+            if ($(".rowspanmore").length > 0) {
+                if ($("#sum").length == 0) {
+                    var trth = $("#gvPerson>tbody>tr").eq(0).clone().attr("id", "sum")
+                    $("#gvPerson").append("<tfoot></tfoot>")
+                    $("#gvPerson tfoot").append(trth);
+                    $("#sum").attr("class", "")
+                }
+                $("#sum").find("td").html("")
+                $("#sum").find("td").attr("rowspan", 1)
+                $("#sum").find("td").eq(0).html("合计")
+                //条目信息合计
+                for (var i = 3; i < $("#sum").find(".item").length; i++) {
+                    if (i<5 || i>8) {
+                        sumcol(i)
+                    }
+                }
+                //工序信息合计
+                var tr = $("#gvPerson>tbody>tr")
+                var sumobj = {};
+                for (var j = 0; j < AllProcessArr.length; j++) {
+                    var classname = AllProcessArr[j];
+                    var classname1 = classname + '' + 'area'
+                    sumobj[classname] = 0
+                    sumobj[classname1] = 0
+                }
+
+                for (var i = 0; i < tr.length; i++) {
+                    trelem = tr.eq(i)
+                    for (var j = 0; j < AllProcessArr.length; j++) {
+                        var classname = AllProcessArr[j];
+                        var classname1 = classname + '' + 'area';
+                        if (trelem.find("." + classname + ":visible").length > 0) {
+                            var num = trelem.find("." + classname).eq(0).text().replace(/\/|\s+/g, "0")
+                            var area = trelem.find("." + classname).eq(1).text().replace(/\/|\s+/g, "0")
+                            sumobj[classname] += parseInt(num);
+                            sumobj[classname1] += parseFloat(area);
+                        } else {
+                            break;
+                        }
+                    }
+                }
+
+                for (var j = 0; j < AllProcessArr.length; j++) {
+                    var classname = AllProcessArr[j];
+                    var classname1 = classname + '' + 'area'
+                    $("#sum").find("." + classname).eq(0).html(sumobj[classname])
+                    $("#sum").find("." + classname).eq(1).html(sumobj[classname1].toFixed(2))
+                }
+
+                $("#sum").css("background-color", "#ccc")
+
+            }
+
+        }
+        //列合计
+        function sumcol(colnum) {
+            var trs = $("#gvPerson>tbody>tr")
+            var sumcoltotal = 0;
+            for (var i = 0; i < trs.length; i++) {
+                trelem = trs.eq(i)
+                if (trelem.find(".item:visible").length > 0) {
+                    sumcoltotal += parseFloat(trelem.find(".item").eq(colnum).text());
+                }
+            }
+            $("#sum").find(".item").eq(colnum).html(Math.round(sumcoltotal * 100) / 100)
+        }
+
+</script>
+</html>
