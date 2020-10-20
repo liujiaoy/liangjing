@@ -45,6 +45,7 @@
                         </td>
                         <td><button @click="removeBook(index)">移除</button></td>
                     </tr>
+                    <tr><td style="color:blue" mce_style="color:red" id="test">测试看看我有什么用</td></tr>
                 </tbody>
             </table>
             <div class="totalPrice">
@@ -98,7 +99,8 @@
             },
             methods: {
                 add: function (index) {
-                    this.bookList[index].num++
+                    this.bookList[index].num++;
+                    alert(document.getElementById("test").getAttribute("mce_style"))
                 },
                 sub: function (index) {
                     let num =  this.bookList[index].num;
